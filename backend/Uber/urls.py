@@ -1,8 +1,15 @@
 from django.contrib import admin
 from django.urls import path
-from .views import ChauffeurView, TaxiView, Carte_griseView, VisiteView, AssuranceView, AgenceView, CapaciteView, PermiView, CategorieView
+from .views import ChauffeurView, TaxiView, Carte_griseView, VisiteView, AssuranceView, AgenceView, CapaciteView, PermiView, CategorieView, UserViewSet, CourseViewSet
+
+from rest_framework import routers
+from django.conf.urls import include
+router = routers.DefaultRouter()
+router.register('users', UserViewSet)
+router.register('courses', CourseViewSet)
 
 urlpatterns = [
+    path('', include(router.urls)),
     path('chauffeurs/', ChauffeurView.as_view()),
     path('chauffeurs/<int:pk>/', ChauffeurView.as_view()),
     path('taxis/', TaxiView.as_view()),

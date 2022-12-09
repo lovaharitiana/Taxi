@@ -1,8 +1,28 @@
 from rest_framework import serializers
-from .models import Chauffeur, Taxi, Carte_grise, Visite, Assurance, Agence, Capacite, Permi, Categorie
+from django.contrib.auth.models import User
+from .models import Chauffeur, Taxi, Carte_grise, Visite, Assurance, Agence, Capacite, Permi, Categorie, Course
+from rest_framework.authtoken.models import Token
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id','username', 'password')
+        extra_kwargs = {'password': {'write_only': True, 'required': True}}
+    
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        Token.objects.create(user=user)
+        return user
+        
+
+
+class CourseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = ('numCrs','depart', 'destination')
+       
 
 class ChauffeurSerializer(serializers.ModelSerializer):
-    class Meta:
+    class Meta: 
         model = Chauffeur
         fields = ('numChf','nomChf','prenomChf','date_naissance','lieu_naissance','adresse','profession')
 

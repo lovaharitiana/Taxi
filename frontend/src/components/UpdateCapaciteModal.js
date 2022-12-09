@@ -32,7 +32,7 @@ const UpdateCapaciteModal = (props) => {
 
 
                                 <Form.Group controlId="droit">
-                                    <Form.Label>Droit</Form.Label>
+                                    <Form.Label>Droit(Ariary)</Form.Label>
                                     <Form.Control type="text" name="droit" required
                                         defaultValue={props.capacite.droit}
                                         placeholder=""></Form.Control>

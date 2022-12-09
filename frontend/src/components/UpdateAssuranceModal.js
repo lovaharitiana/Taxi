@@ -1,16 +1,16 @@
 import React from "react";
 import { Button, Modal, Row, Col, Form } from "react-bootstrap";
-import { updateAgence } from '../services/AgenceService';
-const UpdateAgenceModal = (props) => {
+import { updateAssurance } from '../services/AssuranceService';
+const UpdateAssuranceModal = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
-        updateAgence(props.agence.numAg, e.target)
+        updateAssurance(props.assurance.ref, e.target)
             .then((result) => {
                 alert(result);
                 props.setUpdated(true);
             },
                 (error) => {
-                    alert("Failed to update Agence");
+                    alert("Failed to update Assurance");
                 });
     }
     return (
@@ -22,7 +22,7 @@ const UpdateAgenceModal = (props) => {
                 centered>
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Modifier Agences
+                        Modifier assurance
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -31,10 +31,16 @@ const UpdateAgenceModal = (props) => {
                             <Form onSubmit={handleSubmit}>
 
 
-                                <Form.Group controlId="nomAg">
-                                    <Form.Label>Nom agence</Form.Label>
-                                    <Form.Control type="text" name="nomAg" required
+                                <Form.Group controlId="debut_ass">
+                                    <Form.Label>Debut assurance</Form.Label>
+                                    <Form.Control type="date" name="debut_ass" required
                                         defaultValue={props.assurance.debut_ass}
+                                        placeholder=""></Form.Control>
+                                </Form.Group>
+                                <Form.Group controlId="fin_ass">
+                                    <Form.Label>Fin assurance</Form.Label>
+                                    <Form.Control type="date" name="fin_ass" required
+                                        defaultValue={props.assurance.fin_ass}
                                         placeholder=""></Form.Control>
                                 </Form.Group>
 
@@ -63,4 +69,4 @@ const UpdateAgenceModal = (props) => {
         </div>
     );
 };
-export default UpdateAgenceModal;
+export default UpdateAssuranceModal;

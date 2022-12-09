@@ -1,6 +1,20 @@
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from typing import List
 
-# Create your models here.
+from django.core.exceptions import PermissionDenied
+
+
+# Create your models here
+class Course(models.Model):
+    numCrs = models.CharField(max_length=10, primary_key=True)
+    depart = models.CharField(max_length=30)
+    destination = models.CharField(max_length=30)
+   
+    
+ 
+    
+
 class Chauffeur(models.Model):
     numChf = models.AutoField(primary_key=True)
     nomChf = models.CharField(max_length=30)

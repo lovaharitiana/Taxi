@@ -1,10 +1,38 @@
 from rest_framework.views import APIView
-from .serializers import ChauffeurSerializer, TaxiSerializer, Carte_griseSerializer, VisiteSerializer, AssuranceSerializer, AgenceSerializer, CapaciteSerializer, PermiSerializer, CategorieSerializer
+from .serializers import ChauffeurSerializer, TaxiSerializer, Carte_griseSerializer, VisiteSerializer, AssuranceSerializer, AgenceSerializer, CapaciteSerializer, PermiSerializer, CategorieSerializer, UserSerializer, CourseSerializer
 from django.http.response import JsonResponse
-from .models import Chauffeur, Taxi, Carte_grise, Visite, Assurance, Agence, Capacite, Permi, Categorie
+from .models import Chauffeur, Taxi, Carte_grise, Visite, Assurance, Agence, Capacite, Permi, Categorie, Course
 from django.http.response import Http404
 from rest_framework.response import Response
+from rest_framework.exceptions import AuthenticationFailed
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+import jwt, datetime
+from rest_framework import viewsets
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+
+
+import jwt, datetime 
+
 # Create your views here.
+##########################USER#####################################################################
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+#############################COURSE###############################################################
+class CourseViewSet(viewsets.ModelViewSet):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+    authentication_classes = [TokenAuthentication, ]
+    permission_classes = [IsAuthenticated, ]
+
 ###########################CHAUFFEUR#####################################################################
 class ChauffeurView(APIView):
     

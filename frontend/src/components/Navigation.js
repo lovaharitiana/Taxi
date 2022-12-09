@@ -65,6 +65,9 @@ const Navigation = () => {
             <NavLink exact to="/categories" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="list">Categories list</CDBSidebarMenuItem>
             </NavLink>
+            <NavLink exact to="/users" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="list">Utilisateur list</CDBSidebarMenuItem>
+            </NavLink>
             
            
           </CDBSidebarMenu>
