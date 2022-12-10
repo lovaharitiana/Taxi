@@ -1,15 +1,21 @@
 from django.contrib import admin
 from django.urls import path
-from .views import ChauffeurView, TaxiView, Carte_griseView, VisiteView, AssuranceView, AgenceView, CapaciteView, PermiView, CategorieView, UserViewSet, CourseViewSet
+from .views import ChauffeurView, TaxiView, Carte_griseView, VisiteView, AssuranceView, AgenceView, CapaciteView, PermiView, CategorieView, RegisterView, LoginView, UserViewSet, UserView, LogoutView
 
 from rest_framework import routers
 from django.conf.urls import include
 router = routers.DefaultRouter()
 router.register('users', UserViewSet)
-router.register('courses', CourseViewSet)
+router.register('users/<int:pk>/', UserViewSet)
+#router.register('courses', CourseViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    #path('courses/', CourseView.as_view()),
+    path('register/', RegisterView.as_view()), 
+    path('login/', LoginView.as_view()),
+    path('logout/', LogoutView.as_view()), 
+    path('user/', UserView.as_view()), 
     path('chauffeurs/', ChauffeurView.as_view()),
     path('chauffeurs/<int:pk>/', ChauffeurView.as_view()),
     path('taxis/', TaxiView.as_view()),

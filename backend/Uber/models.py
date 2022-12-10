@@ -6,6 +6,15 @@ from django.core.exceptions import PermissionDenied
 
 
 # Create your models here
+class User(AbstractBaseUser):
+    name= models.CharField(max_length=20)
+    email = models.CharField(max_length=30, unique=True)
+    password = models.CharField(max_length=10)
+    username = None
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['']
+
 class Course(models.Model):
     numCrs = models.CharField(max_length=10, primary_key=True)
     depart = models.CharField(max_length=30)
