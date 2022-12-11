@@ -10,7 +10,7 @@ const Login = () => {
 
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();
-        await fetch('http://127.0.0.1:8000/login/', {
+         await fetch('http://127.0.0.1:8000/login/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include', 
@@ -19,7 +19,10 @@ const Login = () => {
                 password
             })
         });
+        
         setRedirect(true);
+        
+        
 
     }
     if (redirect) {
@@ -54,7 +57,7 @@ const Login = () => {
                 <button className='btn btn-primary' type='submit'>Login</button>
             </form>
             <p className='mt-3'>
-                Don't you have an account ? <Link to="/login">Sign in</Link>
+                Don't you have an account ? <Link to="/register">Sign up</Link>
             </p>
 
         </div>
