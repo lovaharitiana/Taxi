@@ -1,19 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 const Nav = (props: { name: string } ) => {
+    
     const logout = async () => {
         await fetch('http://127.0.0.1:8000/logout/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include', 
             
+            
         });
+        localStorage.clear();
+        
        
 
     }
 
     let menu;
-    if (props.name === '' ) {
+    var test = localStorage.getItem("email")
+    console.log(test)
+    if (test == null ) {
         menu = (
             <ul className='navbar-nav me-auto mb-2 mb-md-0'>
                 <li className='nav-item active'>
@@ -25,6 +31,7 @@ const Nav = (props: { name: string } ) => {
             </ul>
 
         )
+    
     } else {
         menu = (
             <ul className='navbar-nav me-auto mb-2 mb-md-0'>

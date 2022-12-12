@@ -13,6 +13,7 @@ const Home = (props: { name: string } ) => {
         
         <div>
             {props.name ? 'Hi' + props.name: 'you are not logged in'}
+
         </div>
     );
 };

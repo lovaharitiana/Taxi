@@ -19,13 +19,14 @@ function App() {
               const response = await fetch('http://127.0.0.1:8000/user/', {
                   
                   headers: { 'Content-Type': 'application/json',
-                             
-                           },
+          },
                   credentials: 'include',
 
                   
               });
               const content = await response.json();
+              
+
               setName(content.name);
               
              
@@ -41,14 +42,14 @@ function App() {
 
     <div className='App'>
       <BrowserRouter>
-      <Nav name={name} />
+      <Nav name={name}  />
 
       <main className='form-signin'>
 
         
         <Routes>
         <Route path="/" element={ <Home name={name}/>} />
-        <Route path="/login" element={<Login/>} />
+        <Route path="/login" element={<Login setName={setName}/>} />
         <Route path="/register" element={<Register />} />
         </Routes>
         

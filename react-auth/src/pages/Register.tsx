@@ -22,6 +22,9 @@ const Register = () => {
             })
         });
         setRedirect(true);
+        
+       
+        
 
     }
     if (redirect) {

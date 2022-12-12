@@ -3,14 +3,15 @@ import { Link } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 
 
-const Login = () => {
+const Login = (props: { setName: (name: string ) => void }) => {
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
 
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();
-         await fetch('http://127.0.0.1:8000/login/', {
+        const response =  await fetch('http://127.0.0.1:8000/login/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include', 
@@ -19,8 +20,14 @@ const Login = () => {
                 password
             })
         });
+        const content = await response.json();
+        
         
         setRedirect(true);
+        props.setName(content.name);
+        
+        
+        localStorage.setItem("email", JSON.stringify(email));
         
         
 
@@ -28,6 +35,7 @@ const Login = () => {
     if (redirect) {
         return <Navigate to='/' />;
     }
+    
 
     return (
         <div className="container mt-5">

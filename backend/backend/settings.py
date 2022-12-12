@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from datetime import timedelta
+import http
 import os
 from pathlib import Path
 
@@ -28,7 +29,7 @@ SECRET_KEY = 'django-insecure-x*m4@yxx11j0f3niulg(gn56(o^3ocv4a8wn7$m+_()12fo2($
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
 
 
 # Application definition
@@ -47,11 +48,21 @@ INSTALLED_APPS = [
     
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True
+#ALLOWED_HOSTS = [
+    #'localhost', '127.0.0.1']
+
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = False
+
+
+#CORS_ALLOWED_ORIGIN = [
+    #'localhost', '127.0.0.1'
+    #]
 
 CORS_ORIGIN_WHITELIST = [
-    "http://localhost:3000"
+    "http://localhost:3000",
+    
+    
 ]
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -144,3 +155,4 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'Uber.User'
+
