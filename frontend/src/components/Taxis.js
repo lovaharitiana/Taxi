@@ -82,6 +82,8 @@ const Taxis = () => {
             <th>Poids à vide</th>
             <th>Charge utile</th>
             <th>Carrosserie du vehicule</th>
+            <th>Numero Carte_Grise</th>
+            <th>Chauffeur</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -96,6 +98,8 @@ const Taxis = () => {
               <td>{txs.poids_vide}</td>
               <td>{txs.charge_utile}</td>
               <td>{txs.carrosserie}</td>
+              <td>{txs.carte_grise}</td>
+              <td>{txs.chauffeur}</td>
               <td >
               <Button className="mr-2" variant="warning"
                   onClick={event => handleUpdate(event, txs)}>

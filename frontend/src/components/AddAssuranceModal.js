@@ -1,5 +1,6 @@
 import React from "react";
 import { getTaxis } from "../services/TaxiService";
+import { getAgences } from "../services/AgenceService";
 
 import { Button, Modal, Row, Col, Form } from "react-bootstrap";
 import { addAssurance } from '../services/AssuranceService';
@@ -7,7 +8,9 @@ import { useEffect, useState } from "react";
 
 const AddAssuranceModal = (props) => {
     const [taxis, setTaxis] = useState([]);
+    const [agences, setAgences] = useState([]);
     const [isUpdated, setIsUpdated] = useState(false);
+    // TAXI
     useEffect(() => {
         let mounted = true;
         if (taxis.length && !isUpdated) {
@@ -24,7 +27,21 @@ const AddAssuranceModal = (props) => {
           setIsUpdated(false);
         }
       }, [isUpdated, taxis]);
-    
+    // AGENCES
+      useEffect(() => {
+        let mounted = true;
+        getAgences()
+            .then(data => {
+                if (mounted) {
+                    setAgences(data)
+                }
+            })
+        return () => {
+            mounted = false;
+            setIsUpdated(false);
+        }
+    }, [isUpdated, agences]);
+
 
 const handleSubmit = (e) => {
     e.preventDefault();
@@ -68,13 +85,19 @@ return (
                                 <Form.Label>Fin assurance</Form.Label>
                                 <Form.Control type="date" name="fin_ass" required placeholder=""></Form.Control>
                             </Form.Group>
+                            <p></p>
                             <Form.Select aria-label="Default select example" name="numImm" >
                             {taxis.map((txs) =>
 
                                 <option value={txs.numImm}>{txs.numImm}</option>
                             )}
-                                
-                               
+                            </Form.Select>
+                            <p></p>
+                            <Form.Select aria-label="Default select example" name="numAg" >
+                            {agences.map((ag) =>
+
+                                <option value={ag.numAg}>{ag.numAg}</option>
+                            )}
                             </Form.Select>
 
 

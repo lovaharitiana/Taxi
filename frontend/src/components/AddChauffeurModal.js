@@ -1,17 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getPermis } from "../services/PermiService";
+import { getCapacites } from "../services/CapaciteService";
 import { Button, Modal, Row, Col, Form } from "react-bootstrap";
 import { addChauffeur } from '../services/ChauffeurService';
-const addChauffeurModal = (props) => {
+const AddChauffeurModal = (props) => {
+    const [permis, setPermis] = useState([]);
+    const [isUpdated, setIsUpdated] = useState(false);
+    const [capacites, setCapacites] = useState([]);
+    // PERMI
+    useEffect(() => {
+        let mounted = true;
+        getPermis()
+            .then(data => {
+                if (mounted) {
+                    setPermis(data)
+                }
+            })
+        return () => {
+            mounted = false;
+            setIsUpdated(false);
+        }
+    }, [isUpdated, permis]);
+
+    // CAPACITE
+    useEffect(() => {
+        let mounted = true;
+        getCapacites()
+            .then(data => {
+                if (mounted) {
+                    setCapacites(data)
+                }
+            })
+        return () => {
+            mounted = false;
+            setIsUpdated(false);
+        }
+    }, [isUpdated, capacites]);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         addChauffeur(e.target)
-        .then((result)=>{
-            alert(result);
-            props.setUpdated(true);
-        },
-        (error)=>{
-            alert("Failed to add Chauffeur");
-        }); 
+            .then((result) => {
+                alert(result);
+                props.setUpdated(true);
+            },
+                (error) => {
+                    alert("Failed to add Chauffeur");
+                });
     }
     return (
         <div className="container">
@@ -59,6 +94,22 @@ const addChauffeurModal = (props) => {
                                     <Form.Control type="text" name="profession" required placeholder=""></Form.Control>
                                 </Form.Group>
 
+                                <p></p>
+                                <Form.Select aria-label="Default select example" name="numPer" >
+                                    {permis.map((per) =>
+
+                                        <option value={per.numPer}>{per.numPer}</option>
+                                    )}
+                                </Form.Select>
+
+                                <p></p>
+                                <Form.Select aria-label="Default select example" name="numCap" >
+                                    {capacites.map((cap) =>
+
+                                        <option value={cap.numCap}>{cap.numCap}</option>
+                                    )}
+                                </Form.Select>
+
                                 <Form.Group>
                                     <p></p>
                                     <Button variant="primary" type="submit">
@@ -71,13 +122,13 @@ const addChauffeurModal = (props) => {
                     </Row>
                 </Modal.Body>
                 <Modal.Footer>
-                <Button variant="danger" type="submit" onClick={props.onHide}>
-                    Close
-                </Button>
+                    <Button variant="danger" type="submit" onClick={props.onHide}>
+                        Close
+                    </Button>
                 </Modal.Footer>
             </Modal>
 
         </div>
     );
 };
-export default addChauffeurModal;
+export default AddChauffeurModal;

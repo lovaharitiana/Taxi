@@ -69,6 +69,8 @@ const Assurances = () => {
                         <th>Référence</th>
                         <th>Début assurance</th>
                         <th>Fin assurance</th>
+                        <th>Immatriculation</th>
+                        <th>Agence</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -78,6 +80,8 @@ const Assurances = () => {
                             <td>{ass.ref}</td>
                             <td>{ass.debut_ass}</td>
                             <td>{ass.fin_ass}</td>
+                            <td>{ass.taxi}</td>
+                            <td>{ass.agence}</td>
                             <td >
                                 <Button className="mr-2" variant="warning"
                                     onClick={event => handleUpdate(event, ass)}>

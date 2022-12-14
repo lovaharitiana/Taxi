@@ -9,6 +9,7 @@ export function addCapacite(capacite) {
         numCap:capacite.numCap.value,
         droit:capacite.droit.value,
         date_certificat:capacite.date_certificat.value,
+        permi:capacite.numPer.value,
     })
         .then(response => response.data)
 }

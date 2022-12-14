@@ -1,10 +1,31 @@
 import React, { useEffect, useState } from "react";
+import { getTaxis } from "../services/TaxiService";
+
 import { Button, Modal, Row, Col, Form } from "react-bootstrap";
 import { addVisite } from '../services/VisiteService';
-const addVisiteModal = (props) => {
+const AddVisiteModal = (props) => {
+    const [taxis, setTaxis] = useState([]);
+    const [isUpdated, setIsUpdated] = useState(false);
 
+    useEffect(() => {
+        let mounted = true;
+        if (taxis.length && !isUpdated) {
+          return;
+        }
+        getTaxis()
+          .then(data => {
+            if (mounted) {
+              setTaxis(data)
+            }
+          })
+        return () => {
+          mounted = false;
+          setIsUpdated(false);
+        }
+      }, [isUpdated, taxis]);
+    
     const handleSubmit = (e) => {
-        e.preventDefault();
+       e.preventDefault();
         addVisite(e.target)
             .then((result) => {
                 alert(result);
@@ -45,8 +66,14 @@ const addVisiteModal = (props) => {
                                     <Form.Control type="date" name="fin_vis" required placeholder=""></Form.Control>
                                 </Form.Group>
 
+                                <p></p>
+                                <Form.Select aria-label="Default select example" name="numImm" >
+                                    {taxis.map((txs) =>
 
-                               
+                                        <option value={txs.numImm}>{txs.numImm}</option>
+                                    )}
+                                </Form.Select>
+
                                 <Form.Group>
                                     <p></p>
                                     <Button variant="primary" type="submit">
@@ -68,4 +95,4 @@ const addVisiteModal = (props) => {
         </div>
     );
 };
-export default addVisiteModal;
+export default AddVisiteModal;

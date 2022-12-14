@@ -9,6 +9,7 @@ export function addPermi(permi) {
         numPer:permi.numPer.value,
         date:permi.date.value,
         
+        
     })
         .then(response => response.data)
 }

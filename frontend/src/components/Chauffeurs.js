@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import { Table } from "react-bootstrap";
 import { getChauffeurs, deleteChauffeurs } from "../services/ChauffeurService";
 import "../App.css";
@@ -75,6 +76,8 @@ const Chauffeurs = () => {
             <th>Lieu de naissance</th>
             <th>Adresse</th>
             <th>Profession</th>
+            <th>Numero Permis</th>
+            <th>Numero Capacite</th>
             <th>Actions</th>
 
           </tr>
@@ -89,6 +92,8 @@ const Chauffeurs = () => {
               <td>{chf.lieu_naissance}</td>
               <td>{chf.adresse}</td>
               <td>{chf.profession}</td>
+              <td>{chf.permi}</td>
+              <td>{chf.capacite}</td>
               <td>
                 <Button className="mr-2" variant="warning"
                   onClick={event => handleUpdate(event, chf)}>

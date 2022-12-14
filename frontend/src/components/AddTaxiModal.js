@@ -1,7 +1,48 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { getCarte_grises } from "../services/Carte_griseService";
+import { getChauffeurs } from "../services/ChauffeurService";
+
 import { Button, Modal, Row, Col, Form } from "react-bootstrap";
 import { addTaxi } from '../services/TaxiService';
-const addTaxiModal = (props) => {
+const AddTaxiModal = (props) => {
+    const [carte_grises, setCarte_grises] = useState([]);
+    const [chauffeurs, setChauffeurs] = useState([]);
+  
+    const [isUpdated, setIsUpdated] = useState(false);
+//    CARTE GRISE
+    useEffect(() => {
+        let mounted = true;
+        getCarte_grises()
+            .then(data => {
+                if (mounted) {
+                    setCarte_grises(data)
+                }
+            })
+        return () => {
+            mounted = false;
+            setIsUpdated(false);
+        }
+    }, [isUpdated, carte_grises]);
+
+    // CHAUFFEUR
+    useEffect(() => {
+        let mounted = true;
+        if (chauffeurs.length && !isUpdated) {
+          return;
+        }
+        getChauffeurs()
+          .then(data => {
+            if (mounted) {
+              setChauffeurs(data)
+            }
+          })
+        return () => {
+          mounted = false;
+          setIsUpdated(false);
+        }
+      }, [isUpdated, chauffeurs]);
+    
+
     const handleSubmit = (e) => {
         e.preventDefault();
         addTaxi(e.target)
@@ -69,6 +110,22 @@ const addTaxiModal = (props) => {
                                     <Form.Control type="text" name="carrosserie" required placeholder=""></Form.Control>
                                 </Form.Group>
 
+                                <p></p>
+                                <Form.Select aria-label="Default select example" name="numSerie" >
+                                    {carte_grises.map((crt) =>
+
+                                        <option value={crt.numSerie}>{crt.numSerie}</option>
+                                    )}
+                                </Form.Select>
+
+                                <p></p>
+                                <Form.Select aria-label="Default select example" name="numChf" >
+                                    {chauffeurs.map((chf) =>
+
+                                        <option value={chf.numChf}>{chf.numChf}</option>
+                                    )}
+                                </Form.Select>
+
                                 <Form.Group>
                                     <p></p>
                                     <Button variant="primary" type="submit">
@@ -90,4 +147,4 @@ const addTaxiModal = (props) => {
         </div>
     );
 };
-export default addTaxiModal;
+export default AddTaxiModal;

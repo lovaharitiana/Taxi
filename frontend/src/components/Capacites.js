@@ -69,6 +69,7 @@ const Capacites = () => {
                         <th>Numero capacite</th>
                         <th>Droit(Ariary)</th>
                         <th>Date certificat</th>
+                        <th>Numero Permi</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -78,6 +79,7 @@ const Capacites = () => {
                             <td>{cap.numCap}</td>
                             <td>{cap.droit}</td>
                             <td>{cap.date_certificat}</td>
+                            <td>{cap.permi}</td>
                             <td >
                                 <Button className="mr-2" variant="warning"
                                     onClick={event => handleUpdate(event, cap)}>

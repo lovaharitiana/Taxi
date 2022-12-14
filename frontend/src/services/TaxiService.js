@@ -14,7 +14,9 @@ export function addTaxi(taxi) {
         poids_total:taxi.poids_total.value,
         poids_vide:taxi.poids_vide.value,
         charge_utile:taxi.charge_utile.value,
-        carrosserie:taxi.carrosserie.value
+        carrosserie:taxi.carrosserie.value,
+        carte_grise:taxi.numSerie.value,
+        chauffeur:taxi.numChf.value,
     })
         .then(response => response.data)
 }

@@ -13,7 +13,9 @@ export function addChauffeur(chauffeur) {
         date_naissance: chauffeur.date_naissance.value,
         lieu_naissance: chauffeur.lieu_naissance.value,
         adresse: chauffeur.adresse.value,
-        profession: chauffeur.profession.value
+        profession: chauffeur.profession.value,
+        permi:chauffeur.numPer.value,
+        capacite:chauffeur.numCap.value,
     })
         .then(response => response.data)
 }

@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { getPermis } from "../services/PermiService";
 import { Button, Modal, Row, Col, Form } from "react-bootstrap";
 import { addCapacite} from '../services/CapaciteService';
-const addCapaciteModal = (props) => {
+const AddCapaciteModal = (props) => {
+    const [permis, setPermis] = useState([]);
+    const [isUpdated, setIsUpdated] = useState(false);
+    useEffect(() => {
+        let mounted = true;
+        getPermis()
+            .then(data => {
+                if (mounted) {
+                    setPermis(data)
+                }
+            })
+        return () => {
+            mounted = false;
+            setIsUpdated(false);
+        }
+    }, [isUpdated, permis]);
     const handleSubmit = (e) => {
         e.preventDefault();
         addCapacite(e.target)
@@ -43,7 +59,13 @@ const addCapaciteModal = (props) => {
                                     <Form.Label>Date certificat</Form.Label>
                                     <Form.Control type="date" name="date_certificat" required placeholder=""></Form.Control>
                                 </Form.Group>
+                                <p></p>
+                                <Form.Select aria-label="Default select example" name="numPer" >
+                                    {permis.map((per) =>
 
+                                        <option value={per.numPer}>{per.numPer}</option>
+                                    )}
+                                </Form.Select>
                                 
                                 <Form.Group>
                                     <p></p>
@@ -66,4 +88,4 @@ const addCapaciteModal = (props) => {
         </div>
     );
 };
-export default addCapaciteModal;
+export default AddCapaciteModal;

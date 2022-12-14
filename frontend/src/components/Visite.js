@@ -69,6 +69,7 @@ const Visites = () => {
                         <th>Numero de visite</th>
                         <th>Date de visite</th>
                         <th>Date de validité de visite</th>
+                        <th>Immatriculation</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -78,6 +79,7 @@ const Visites = () => {
                             <td>{vst.numVis}</td>
                             <td>{vst.date_vis}</td>
                             <td>{vst.fin_vis}</td>
+                            <td>{vst.taxi}</td>
                             <td >
                                 <Button className="mr-2" variant="warning"
                                     onClick={event => handleUpdate(event, vst)}>

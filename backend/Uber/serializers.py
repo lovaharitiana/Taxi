@@ -39,13 +39,13 @@ class CourseSerializer(serializers.ModelSerializer):
 class ChauffeurSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Chauffeur
-        fields = ('numChf','nomChf','prenomChf','date_naissance','lieu_naissance','adresse','profession')
+        fields = ('numChf','nomChf','prenomChf','date_naissance','lieu_naissance','adresse','profession','permi', 'capacite')
 
 
 class TaxiSerializer(serializers.ModelSerializer):
     class Meta:
         model = Taxi
-        fields = ('numImm','marque','nb_place','numMoteur','poids_total','poids_vide','charge_utile','carrosserie')
+        fields = ('numImm','marque','nb_place','numMoteur','poids_total','poids_vide','charge_utile','carrosserie', 'carte_grise', 'chauffeur')
 
 
 class Carte_griseSerializer(serializers.ModelSerializer):
@@ -56,13 +56,13 @@ class Carte_griseSerializer(serializers.ModelSerializer):
 class VisiteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Visite
-        fields = ('numVis','date_vis','fin_vis')
+        fields = ('numVis','date_vis','fin_vis','taxi')
 
 class AssuranceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Assurance
-        fields = ('ref','debut_ass','fin_ass', 'taxi')
+        fields = ('ref','debut_ass','fin_ass', 'taxi', 'agence')
 
 class AgenceSerializer(serializers.ModelSerializer):
     class Meta:
@@ -72,7 +72,7 @@ class AgenceSerializer(serializers.ModelSerializer):
 class CapaciteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Capacite
-        fields = ('numCap','droit','date_certificat')
+        fields = ('numCap','droit','date_certificat', 'permi')
 
 class PermiSerializer(serializers.ModelSerializer):
     class Meta:
