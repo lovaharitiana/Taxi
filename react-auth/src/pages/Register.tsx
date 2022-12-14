@@ -32,8 +32,8 @@ const Register = () => {
     }
     return (
         <div className="container mt-5">
-            <h1>Sign up</h1>
-            <p>Create your account</p>
+            <h2>Inscrivez-vous</h2>
+            <p>et bénéficiez des avantages de la plateforme</p>
             <form onSubmit={submit}>
                 <div className='form-group'>
                     <input
@@ -65,10 +65,10 @@ const Register = () => {
                         required />
                 </div>
                 <p></p>
-                <button className='btn btn-primary' type='submit'>Sign up</button>
+                <button className='btn btn-primary' type='submit'>Enregistrer</button>
             </form>
             <p className='mt-3'>
-                Already have an account ? <Link to="/login">Sign in</Link>
+                Déjà inscrit ? <Link to="/login">Se connecter</Link>
             </p>
 
         </div>

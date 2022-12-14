@@ -59,9 +59,10 @@ class VisiteSerializer(serializers.ModelSerializer):
         fields = ('numVis','date_vis','fin_vis')
 
 class AssuranceSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Assurance
-        fields = ('ref','debut_ass','fin_ass')
+        fields = ('ref','debut_ass','fin_ass', 'taxi')
 
 class AgenceSerializer(serializers.ModelSerializer):
     class Meta:

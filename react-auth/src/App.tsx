@@ -49,7 +49,7 @@ function App() {
         
         <Routes>
         <Route path="/" element={ <Home name={name}/>} />
-        <Route path="/login" element={<Login setName={setName}/>} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         </Routes>
         

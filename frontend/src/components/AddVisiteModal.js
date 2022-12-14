@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Modal, Row, Col, Form } from "react-bootstrap";
 import { addVisite } from '../services/VisiteService';
 const addVisiteModal = (props) => {
+
     const handleSubmit = (e) => {
         e.preventDefault();
         addVisite(e.target)
-        .then((result)=>{
-            alert(result);
-            props.setUpdated(true);
-        },
-        (error)=>{
-            alert("Failed to add Visite");
-        }); 
+            .then((result) => {
+                alert(result);
+                props.setUpdated(true);
+            },
+                (error) => {
+                    alert("Failed to add Visite");
+                });
     }
     return (
         <div className="container">
@@ -45,8 +46,7 @@ const addVisiteModal = (props) => {
                                 </Form.Group>
 
 
-                                
-
+                               
                                 <Form.Group>
                                     <p></p>
                                     <Button variant="primary" type="submit">
@@ -59,9 +59,9 @@ const addVisiteModal = (props) => {
                     </Row>
                 </Modal.Body>
                 <Modal.Footer>
-                <Button variant="danger" type="submit" onClick={props.onHide}>
-                    Close
-                </Button>
+                    <Button variant="danger" type="submit" onClick={props.onHide}>
+                        Close
+                    </Button>
                 </Modal.Footer>
             </Modal>
 

@@ -35,7 +35,7 @@ const addCapaciteModal = (props) => {
                                 </Form.Group>
 
                                 <Form.Group controlId="droit">
-                                    <Form.Label>Droit</Form.Label>
+                                    <Form.Label>Droit(Ariary)</Form.Label>
                                     <Form.Control type="text" name="droit" required placeholder=""></Form.Control>
                                 </Form.Group>
 

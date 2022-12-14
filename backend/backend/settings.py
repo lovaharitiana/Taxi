@@ -55,9 +55,9 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = False
 
 
-#CORS_ALLOWED_ORIGIN = [
-    #'localhost', '127.0.0.1'
-    #]
+CORS_ALLOWED_ORIGIN = [
+    'localhost', '127.0.0.1'
+    ]
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",

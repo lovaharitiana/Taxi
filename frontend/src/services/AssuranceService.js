@@ -9,6 +9,7 @@ export function addAssurance(assurance) {
         ref:assurance.ref.value,
         debut_ass:assurance.debut_ass.value,
         fin_ass:assurance.fin_ass.value,
+        taxi:assurance.numImm.value, 
     })
         .then(response => response.data)
 }

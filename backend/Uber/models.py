@@ -19,10 +19,27 @@ class Course(models.Model):
     numCrs = models.CharField(max_length=10, primary_key=True)
     depart = models.CharField(max_length=30)
     destination = models.CharField(max_length=30)
+
+class Categorie(models.Model): 
+    numCat = models.CharField(max_length=10, primary_key=True)
+    type = models.CharField(max_length=5)
+
+
+class Permi(models.Model): 
+    numPer = models.CharField(max_length=10, primary_key=True)
+    date = models.DateField()
+  
    
-    
- 
-    
+
+class Capacite(models.Model): 
+    numCap = models.IntegerField(primary_key=True)
+    droit = models.IntegerField()
+    date_certificat = models.DateField()
+    permi = models.OneToOneField(Permi, on_delete=models.CASCADE, blank=True, null=True, to_field="numPer", db_column="numPer")
+   
+
+   
+   
 
 class Chauffeur(models.Model):
     numChf = models.AutoField(primary_key=True)
@@ -32,6 +49,14 @@ class Chauffeur(models.Model):
     lieu_naissance = models.CharField(max_length=20)
     adresse = models.CharField(max_length=20)
     profession = models.CharField(max_length=20)
+    permi = models.OneToOneField(Permi, on_delete=models.CASCADE, blank=True, null=True, to_field="numPer", db_column="numPer")
+    capacite = models.OneToOneField(Capacite, on_delete=models.CASCADE, blank=True, null=True, to_field="numCap", db_column="numCap")
+    
+
+
+class Carte_grise(models.Model): 
+    numSerie = models.IntegerField(primary_key=True)
+    date_fabrication = models.DateField()
 
 class Taxi(models.Model):
     numImm = models.CharField(max_length=10, primary_key=True)
@@ -42,33 +67,32 @@ class Taxi(models.Model):
     poids_vide = models.IntegerField()
     charge_utile = models.IntegerField()
     carrosserie = models.CharField(max_length=10)
+    carte_grise = models.OneToOneField(Carte_grise, on_delete=models.CASCADE, blank=True, null=True, to_field="numSerie", db_column="numSerie")
+    chauffeur = models.OneToOneField(Chauffeur, on_delete=models.CASCADE, blank=True, null=True, to_field="numChf", db_column="numChf")
 
-class Carte_grise(models.Model): 
-    numSerie = models.IntegerField(primary_key=True)
-    date_fabrication = models.DateField()
+
 
 class Visite(models.Model): 
     numVis = models.IntegerField(primary_key=True)
     date_vis = models.DateField()
     fin_vis = models.DateField()
-
-class Assurance(models.Model): 
-    ref = models.IntegerField(primary_key=True)
-    debut_ass = models.DateField()
-    fin_ass = models.DateField()
+    taxi = models.ForeignKey(Taxi, on_delete=models.CASCADE, blank=True, null=True, to_field="numImm", db_column="numImm")
+   
 
 class Agence(models.Model): 
     numAg = models.CharField(max_length=10, primary_key=True)
     nomAg = models.CharField(max_length=10)
 
-class Capacite(models.Model): 
-    numCap = models.IntegerField(primary_key=True)
-    droit = models.IntegerField()
-    date_certificat = models.DateField()
 
-class Permi(models.Model): 
-    numPer = models.CharField(max_length=10, primary_key=True)
-    date = models.DateField()
+class Assurance(models.Model): 
+    ref = models.IntegerField(primary_key=True)
+    debut_ass = models.DateField()
+    fin_ass = models.DateField()
+    taxi = models.ForeignKey(Taxi, on_delete=models.CASCADE, blank=True, null=True, to_field="numImm", db_column="numImm")
+    agence = models.ForeignKey(Agence, on_delete=models.CASCADE, blank=True, null=True, to_field="numAg", db_column="numAg")
+    
+
+
 
 class Categorie(models.Model): 
     numCat = models.CharField(max_length=10, primary_key=True)

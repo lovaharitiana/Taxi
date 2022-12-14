@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 
 
-const Login = (props: { setName: (name: string ) => void }) => {
+const Login = ( ) => {
     
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -24,7 +24,7 @@ const Login = (props: { setName: (name: string ) => void }) => {
         
         
         setRedirect(true);
-        props.setName(content.name);
+        
         
         
         localStorage.setItem("email", JSON.stringify(email));
@@ -39,8 +39,8 @@ const Login = (props: { setName: (name: string ) => void }) => {
 
     return (
         <div className="container mt-5">
-            <h1>Sign in</h1>
-            <p>Sign in into your account</p>
+            <h1>Connectez-vous</h1>
+           
             <form onSubmit={submit}>
                 <div className='form-group'>
                     <input
@@ -62,10 +62,10 @@ const Login = (props: { setName: (name: string ) => void }) => {
                         required />
                 </div>
                 <p></p>
-                <button className='btn btn-primary' type='submit'>Login</button>
+                <button className='btn btn-primary' type='submit'>Connexion</button>
             </form>
             <p className='mt-3'>
-                Don't you have an account ? <Link to="/register">Sign up</Link>
+                Vous êtes nouveau ? <Link to="/register">Créer un compte</Link>
             </p>
 
         </div>
