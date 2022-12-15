@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from .views import ChauffeurView, TaxiView, Carte_griseView, VisiteView, AssuranceView, AgenceView, CapaciteView, PermiView, CategorieView, RegisterView, LoginView, UserViewSet, UserView, LogoutView
+from .views import ChauffeurView, TaxiView, Carte_griseView, VisiteView, AssuranceView, AgenceView, CapaciteView, PermiView, CategorieView, RegisterView, LoginView, UserViewSet, UserView, LogoutView, CourseView
 
 from rest_framework import routers
 from django.conf.urls import include
@@ -11,7 +11,7 @@ router.register('users/<int:pk>/', UserViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    #path('courses/', CourseView.as_view()),
+    path('courses/', CourseView.as_view()),
     path('register/', RegisterView.as_view()), 
     path('login/', LoginView.as_view()),
     path('logout/', LogoutView.as_view()), 

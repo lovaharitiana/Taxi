@@ -16,9 +16,9 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = ['']
 
 class Course(models.Model):
-    numCrs = models.CharField(max_length=10, primary_key=True)
     depart = models.CharField(max_length=30)
     destination = models.CharField(max_length=30)
+    distance = models.IntegerField(default=1)
 
 class Categorie(models.Model): 
     numCat = models.CharField(max_length=10, primary_key=True)

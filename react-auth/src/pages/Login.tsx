@@ -20,6 +20,7 @@ const Login = ( ) => {
                 password
             })
         });
+        
         const content = await response.json();
         
         
@@ -33,8 +34,12 @@ const Login = ( ) => {
 
     }
     if (redirect) {
-        return <Navigate to='/' />;
-    }
+        window.setTimeout(function(){
+            window.location.reload()
+        }, 100)
+        return <Navigate to='/' />; 
+    } 
+    
     
 
     return (

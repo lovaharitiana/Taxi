@@ -17,9 +17,17 @@ const Nav = (props: { name: string } ) => {
     }
 
     let menu;
+
+    let logoutBtn = document.querySelector('#btnLogout')
+    logoutBtn?.addEventListener('click', function(){
+        window.setTimeout(function(){
+            window.location.reload()
+        }, 100)
+    })
+
     var test = localStorage.getItem("email")
     console.log(test)
-    if (test == null ) {
+    if (test == undefined ) {
         menu = (
             <ul className='navbar-nav me-auto mb-2 mb-md-0'>
                 <li className='nav-item active'>
@@ -29,14 +37,13 @@ const Nav = (props: { name: string } ) => {
                     <Link to='/register' className='nav-link'>Register</Link>
                 </li>
             </ul>
-
         )
     
     } else {
         menu = (
             <ul className='navbar-nav me-auto mb-2 mb-md-0'>
                 <li className='nav-item active'>
-                    <Link to='/login' className='nav-link' onClick={logout}>Logout</Link>
+                    <Link to='/login' className='nav-link' id='btnLogout' onClick={logout}>Logout</Link>
                 </li>
             </ul>
 

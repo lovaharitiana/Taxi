@@ -124,6 +124,15 @@ class LogoutView(APIView):
 
 
 #############################COURSE###############################################################
+class CourseView(APIView):
+   def post(self, request):
+        data = request.data
+        serializer = CourseSerializer(data=data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse("votre demande est bien envoyée", safe=False)
+        return JsonResponse("Failed to add course", safe=False)
 
    
 

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 #from django.contrib.auth.models import User
-from .models import Chauffeur, Taxi, Carte_grise, Visite, Assurance, Agence, Capacite, Permi, Categorie, Course, User
+from .models import Chauffeur, Taxi, Carte_grise, Visite, Assurance, Agence, Capacite, Permi, Categorie, User, Course
 #from rest_framework.authtoken.models import Token
 #class UserSerializer(serializers.ModelSerializer):
     #class Meta:
@@ -33,7 +33,7 @@ class UserSerializer(serializers.ModelSerializer):
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = ('numCrs','depart', 'destination')
+        fields = ('depart', 'destination', 'distance')
        
 
 class ChauffeurSerializer(serializers.ModelSerializer):
