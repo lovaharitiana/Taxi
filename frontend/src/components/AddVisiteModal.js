@@ -67,7 +67,9 @@ const AddVisiteModal = (props) => {
                                 </Form.Group>
 
                                 <p></p>
+                                <Form.Label>Immatriculation</Form.Label>
                                 <Form.Select aria-label="Default select example" name="numImm" >
+                                
                                     {taxis.map((txs) =>
 
                                         <option value={txs.numImm}>{txs.numImm}</option>

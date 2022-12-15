@@ -7,9 +7,9 @@ import { addTaxi } from '../services/TaxiService';
 const AddTaxiModal = (props) => {
     const [carte_grises, setCarte_grises] = useState([]);
     const [chauffeurs, setChauffeurs] = useState([]);
-  
+
     const [isUpdated, setIsUpdated] = useState(false);
-//    CARTE GRISE
+    // //    CARTE GRISE
     useEffect(() => {
         let mounted = true;
         getCarte_grises()
@@ -28,31 +28,31 @@ const AddTaxiModal = (props) => {
     useEffect(() => {
         let mounted = true;
         if (chauffeurs.length && !isUpdated) {
-          return;
+            return;
         }
         getChauffeurs()
-          .then(data => {
-            if (mounted) {
-              setChauffeurs(data)
-            }
-          })
+            .then(data => {
+                if (mounted) {
+                    setChauffeurs(data)
+                }
+            })
         return () => {
-          mounted = false;
-          setIsUpdated(false);
+            mounted = false;
+            setIsUpdated(false);
         }
-      }, [isUpdated, chauffeurs]);
-    
+    }, [isUpdated, chauffeurs]);
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
         addTaxi(e.target)
-        .then((result)=>{
-            alert(result);
-            props.setUpdated(true);
-        },
-        (error)=>{
-            alert("Failed to add Taxi");
-        }); 
+            .then((result) => {
+                alert(result);
+                props.setUpdated(true);
+            },
+                (error) => {
+                    alert("Failed to add Taxi");
+                });
     }
     return (
         <div className="container">
@@ -111,7 +111,9 @@ const AddTaxiModal = (props) => {
                                 </Form.Group>
 
                                 <p></p>
+                                <Form.Label>Numero carte_grise</Form.Label>
                                 <Form.Select aria-label="Default select example" name="numSerie" >
+                                    
                                     {carte_grises.map((crt) =>
 
                                         <option value={crt.numSerie}>{crt.numSerie}</option>
@@ -119,6 +121,7 @@ const AddTaxiModal = (props) => {
                                 </Form.Select>
 
                                 <p></p>
+                                <Form.Label>Numero Chauffeur</Form.Label>
                                 <Form.Select aria-label="Default select example" name="numChf" >
                                     {chauffeurs.map((chf) =>
 
@@ -138,9 +141,9 @@ const AddTaxiModal = (props) => {
                     </Row>
                 </Modal.Body>
                 <Modal.Footer>
-                <Button variant="danger" type="submit" onClick={props.onHide}>
-                    Close
-                </Button>
+                    <Button variant="danger" type="submit" onClick={props.onHide}>
+                        Close
+                    </Button>
                 </Modal.Footer>
             </Modal>
 

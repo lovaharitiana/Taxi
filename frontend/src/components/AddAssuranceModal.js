@@ -86,14 +86,18 @@ return (
                                 <Form.Control type="date" name="fin_ass" required placeholder=""></Form.Control>
                             </Form.Group>
                             <p></p>
+                            <Form.Label>Immatriculation</Form.Label>
                             <Form.Select aria-label="Default select example" name="numImm" >
+                            
                             {taxis.map((txs) =>
 
                                 <option value={txs.numImm}>{txs.numImm}</option>
                             )}
                             </Form.Select>
                             <p></p>
+                            <Form.Label>Agence</Form.Label>
                             <Form.Select aria-label="Default select example" name="numAg" >
+                            
                             {agences.map((ag) =>
 
                                 <option value={ag.numAg}>{ag.numAg}</option>

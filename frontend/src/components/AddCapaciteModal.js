@@ -60,7 +60,9 @@ const AddCapaciteModal = (props) => {
                                     <Form.Control type="date" name="date_certificat" required placeholder=""></Form.Control>
                                 </Form.Group>
                                 <p></p>
+                                <Form.Label>Permis</Form.Label>
                                 <Form.Select aria-label="Default select example" name="numPer" >
+                                
                                     {permis.map((per) =>
 
                                         <option value={per.numPer}>{per.numPer}</option>

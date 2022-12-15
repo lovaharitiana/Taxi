@@ -95,6 +95,7 @@ const AddChauffeurModal = (props) => {
                                 </Form.Group>
 
                                 <p></p>
+                                <Form.Label>Permis</Form.Label>
                                 <Form.Select aria-label="Default select example" name="numPer" >
                                     {permis.map((per) =>
 
@@ -103,6 +104,7 @@ const AddChauffeurModal = (props) => {
                                 </Form.Select>
 
                                 <p></p>
+                                <Form.Label>Capacite</Form.Label>
                                 <Form.Select aria-label="Default select example" name="numCap" >
                                     {capacites.map((cap) =>
 

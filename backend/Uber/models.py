@@ -23,12 +23,17 @@ class Course(models.Model):
 class Categorie(models.Model): 
     numCat = models.CharField(max_length=10, primary_key=True)
     type = models.CharField(max_length=5)
+   
 
 
 class Permi(models.Model): 
     numPer = models.CharField(max_length=10, primary_key=True)
     date = models.DateField()
-  
+    Categorie = models.ManyToManyField(Categorie)
+
+
+
+
    
 
 class Capacite(models.Model): 
@@ -94,7 +99,4 @@ class Assurance(models.Model):
 
 
 
-class Categorie(models.Model): 
-    numCat = models.CharField(max_length=10, primary_key=True)
-    type = models.CharField(max_length=5)
 
