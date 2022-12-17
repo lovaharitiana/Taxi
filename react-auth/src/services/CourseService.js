@@ -4,7 +4,8 @@ export function addCourse(course) {
         
         depart:course.depart.value,
         destination:course.destination.value,
-        distance:Math.floor(Math.random() * 10) + 1
+        distance:course.distance.value,
+        montant:course.montant.value,
     })
         .then(response => response.data)
 }

@@ -19,6 +19,8 @@ class Course(models.Model):
     depart = models.CharField(max_length=30)
     destination = models.CharField(max_length=30)
     distance = models.IntegerField(default=1)
+    montant = models.IntegerField(default=1)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
 class Categorie(models.Model): 
     numCat = models.CharField(max_length=10, primary_key=True)

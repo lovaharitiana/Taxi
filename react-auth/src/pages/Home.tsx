@@ -6,10 +6,13 @@ import { Button, Modal, Row, Col, Form } from "react-bootstrap";
 
 
 
-
 const Home = (props: any) => {
+    const [show, setShow] = useState(false)
+    
+    const [distance, setDistance] = useState(0)
     const handleSubmit = (e: { preventDefault: () => void; target: any; }) => {
         e.preventDefault();
+        
         addCourse(e.target)
             .then((result) => {
                 alert(result);
@@ -19,8 +22,11 @@ const Home = (props: any) => {
                     alert("Failed to add Course");
                 });
     }
-
-
+    const handleCalculer=(e: { preventDefault: () => void; target: any; }) => {
+        e.preventDefault();
+        setShow(true);
+        setDistance(Math.floor(Math.random() * 10) + 1)
+    }
 
     return (
         <div className="container">
@@ -44,14 +50,38 @@ const Home = (props: any) => {
                     <Form.Control type="text" name="distance" required placeholder=""></Form.Control>
                 </Form.Group> */}
 
+                
 
 
                 <Form.Group>
                     <p></p>
-                    <Button variant="primary" type="submit">
-                        Ajouter
+                    <Button variant="primary" onClick={handleCalculer}>
+                        Calculez
                     </Button>
                 </Form.Group>
+
+                 {show &&<Form.Group controlId="calcul">
+                    <Form.Group controlId="distance">
+                        <Form.Label>Distance</Form.Label>
+                        <Form.Control type="number" name="distance" required placeholder=""  value={distance}></Form.Control>
+
+                    </Form.Group>
+                    <Form.Group controlId="montant">
+                        <Form.Label>Tarif</Form.Label>
+                        <Form.Control type="number" name="montant" required placeholder=""  value={distance * 2000}></Form.Control>
+
+                    </Form.Group>
+
+                    <Form.Group>
+                    <p></p>
+                    <Button variant="primary" type="submit">
+                        Envoyer
+                    </Button>
+                    </Form.Group>
+                </Form.Group>}
+
+
+
             </Form>
 
         </div>

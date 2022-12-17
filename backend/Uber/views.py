@@ -56,6 +56,9 @@ class UserViewSet(viewsets.ModelViewSet):
         user_to_delete.delete()
         return JsonResponse("Utilisateur deleted successfully", safe=False)
 
+class CourseViewSet(viewsets.ModelViewSet):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
     
 
 class RegisterView(APIView):
