@@ -12,6 +12,7 @@ import Capacites from './components/Capacites';
 import Permis from './components/Permis';
 import Categories from './components/Categories';
 import Users from './components/Users';
+import Course from './components/Course';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
@@ -32,6 +33,7 @@ function App() {
         <Route exact path="/permis" element={<Permis />} />
         <Route exact path="/categories" element={<Categories />} />
         <Route exact path="/users" element={<Users />} />
+        <Route exact path="/course" element={<Course />} />
       </Routes>
     </BrowserRouter>
 

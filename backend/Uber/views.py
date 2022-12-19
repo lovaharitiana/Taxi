@@ -56,10 +56,7 @@ class UserViewSet(viewsets.ModelViewSet):
         user_to_delete.delete()
         return JsonResponse("Utilisateur deleted successfully", safe=False)
 
-class CourseViewSet(viewsets.ModelViewSet):
-    queryset = Course.objects.all()
-    serializer_class = CourseSerializer
-    
+   
 
 class RegisterView(APIView):
     def post(self, request):
@@ -127,8 +124,25 @@ class LogoutView(APIView):
 
 
 #############################COURSE###############################################################
+class CourseViewSet(viewsets.ModelViewSet):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+ 
+    def put(self, request, pk=None):
+        course_to_update = Course.objects.get(id=pk)
+        serializer = CourseSerializer(
+            instance=course_to_update, data=request.data, partial=True
+        )
+
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse("Course Updated Successfully", safe=False)
+        return JsonResponse("Failed to Update Course")
+
 class CourseView(APIView):
-   def post(self, request):
+    def post(self, request):
+        user=request.user
+        print(user)
         data = request.data
         serializer = CourseSerializer(data=data)
 

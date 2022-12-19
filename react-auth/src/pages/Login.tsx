@@ -23,7 +23,6 @@ const Login = ( ) => {
         
         const content = await response.json();
         
-        
         setRedirect(true);
         
         

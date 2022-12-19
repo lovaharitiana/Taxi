@@ -3,12 +3,15 @@ import logo from './logo.svg';
 import axios from 'axios';
 import { addCourse } from '../services/CourseService';
 import { Button, Modal, Row, Col, Form } from "react-bootstrap";
-
+// import { useNavigate } from 'react-router-dom';
 
 
 const Home = (props: any) => {
     const [show, setShow] = useState(false)
+    // const history = useNavigate();
     
+    // const currentUrl = history.location.pathname;
+    // const userId = currentUrl.split('/user')[2];
     const [distance, setDistance] = useState(0)
     const handleSubmit = (e: { preventDefault: () => void; target: any; }) => {
         e.preventDefault();
@@ -33,8 +36,7 @@ const Home = (props: any) => {
             
 
             <Form onSubmit={handleSubmit}>
-               
-
+            
                 <Form.Group controlId="depart">
                     <Form.Label>Depart</Form.Label>
                     <Form.Control type="text" name="depart" required placeholder=""></Form.Control>
@@ -62,13 +64,13 @@ const Home = (props: any) => {
 
                  {show &&<Form.Group controlId="calcul">
                     <Form.Group controlId="distance">
-                        <Form.Label>Distance</Form.Label>
-                        <Form.Control type="number" name="distance" required placeholder=""  value={distance}></Form.Control>
+                        
+                        <Form.Control type="hidden" name="distance" required placeholder=""  value={distance}></Form.Control>
 
                     </Form.Group>
                     <Form.Group controlId="montant">
                         <Form.Label>Tarif</Form.Label>
-                        <Form.Control type="number" name="montant" required placeholder=""  value={distance * 2000}></Form.Control>
+                        <Form.Control type="number" name="montant" required placeholder=""  value={distance * 1000}></Form.Control>
 
                     </Form.Group>
 

@@ -26,6 +26,7 @@ function App() {
               });
               const content = await response.json();
               
+              localStorage.setItem("id", JSON.stringify(content.id));
 
               setName(content.name);
               

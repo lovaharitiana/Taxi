@@ -15,13 +15,6 @@ class User(AbstractBaseUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['']
 
-class Course(models.Model):
-    depart = models.CharField(max_length=30)
-    destination = models.CharField(max_length=30)
-    distance = models.IntegerField(default=1)
-    montant = models.IntegerField(default=1)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-
 class Categorie(models.Model): 
     numCat = models.CharField(max_length=10, primary_key=True)
     type = models.CharField(max_length=5)
@@ -48,6 +41,8 @@ class Capacite(models.Model):
    
    
 
+
+
 class Chauffeur(models.Model):
     numChf = models.AutoField(primary_key=True)
     nomChf = models.CharField(max_length=30)
@@ -65,6 +60,7 @@ class Carte_grise(models.Model):
     numSerie = models.IntegerField(primary_key=True)
     date_fabrication = models.DateField()
 
+
 class Taxi(models.Model):
     numImm = models.CharField(max_length=10, primary_key=True)
     marque = models.CharField(max_length=20)
@@ -76,6 +72,17 @@ class Taxi(models.Model):
     carrosserie = models.CharField(max_length=10)
     carte_grise = models.OneToOneField(Carte_grise, on_delete=models.CASCADE, blank=True, null=True, to_field="numSerie", db_column="numSerie")
     chauffeur = models.OneToOneField(Chauffeur, on_delete=models.CASCADE, blank=True, null=True, to_field="numChf", db_column="numChf")
+
+
+
+
+class Course(models.Model):
+    depart = models.CharField(max_length=30)
+    destination = models.CharField(max_length=30)
+    distance = models.IntegerField(default=1)
+    montant = models.IntegerField(default=1)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    taxi = models.ForeignKey(Taxi, on_delete=models.CASCADE, blank=True, null=True, to_field="numImm", db_column="numImm")
 
 
 
