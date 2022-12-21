@@ -8,6 +8,7 @@ const Login = ( ) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
+    const [error, setError] = useState('');
 
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();
@@ -21,13 +22,16 @@ const Login = ( ) => {
             })
         });
         
-        const content = await response.json();
+        const content = await response;
+        if(content.status==200){
+            setRedirect(true);
+            localStorage.setItem("email", JSON.stringify(email));
+        }
+        else{
+            setError('Invalid username or password');
+        }
         
-        setRedirect(true);
         
-        
-        
-        localStorage.setItem("email", JSON.stringify(email));
         
         
 
@@ -44,7 +48,7 @@ const Login = ( ) => {
     return (
         <div className="container mt-5">
             <h1>Connectez-vous</h1>
-           
+            {error && <div className="error">{error}</div>}
             <form onSubmit={submit}>
                 <div className='form-group'>
                     <input

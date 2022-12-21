@@ -50,6 +50,7 @@ const Course = () => {
                         <th>Destination</th>
                         <th>Montant</th>
                         <th>Utilisateur</th>
+                        <th>Date</th>
                         <th>Taxi</th>
                     </tr>
                 </thead>
@@ -61,6 +62,7 @@ const Course = () => {
                             <td>{crs.destination}</td>
                             <td>{crs.montant}</td>
                             <td>{crs.user}</td>
+                            <td>{crs.date}</td>
                             <td>{crs.taxi}</td>
                             <td>
                                 <Button className="mr-2" variant="warning"

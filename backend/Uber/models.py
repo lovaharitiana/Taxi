@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from typing import List
-
+from django.utils import timezone
 from django.core.exceptions import PermissionDenied
 
 
@@ -81,9 +81,10 @@ class Course(models.Model):
     destination = models.CharField(max_length=30)
     distance = models.IntegerField(default=1)
     montant = models.IntegerField(default=1)
+    date = models.DateField(default=timezone.now)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     taxi = models.ForeignKey(Taxi, on_delete=models.CASCADE, blank=True, null=True, to_field="numImm", db_column="numImm")
-
+    
 
 
 class Visite(models.Model): 

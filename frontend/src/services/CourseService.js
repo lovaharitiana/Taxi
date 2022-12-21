@@ -14,7 +14,7 @@ export function updateCourse(crsid, course) {
         montant: course.montant.value,
         user: course.user.value,
         taxi: course.numImm.value,
-        
+        date: course.date.value,
     })
         .then(response => response.data)
 }

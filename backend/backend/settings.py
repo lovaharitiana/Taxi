@@ -61,6 +61,7 @@ CORS_ALLOWED_ORIGIN = [
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
+    "http://localhost:3001",
     
     
 ]

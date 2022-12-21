@@ -10,7 +10,7 @@ const Nav = (props: { name: string } ) => {
             
             
         });
-        localStorage.clear();
+        localStorage.removeItem("email");
         
        
 

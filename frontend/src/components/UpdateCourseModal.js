@@ -77,6 +77,12 @@ const UpdateCourseModal = (props) => {
                                     placeholder=""></Form.Control>
                                 </Form.Group>
 
+                                <Form.Group controlId="date">
+                                    {/* <Form.Label>Date</Form.Label> */}
+                                    <Form.Control type="hidden" name="date" required 
+                                    defaultValue={props.course.date}
+                                    placeholder=""></Form.Control>
+                                </Form.Group>
 
                                 <Form.Label>Immatriculation</Form.Label>
                                 <Form.Select aria-label="Default select example" name="numImm" >
