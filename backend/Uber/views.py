@@ -199,6 +199,10 @@ class ChauffeurView(APIView):
 
 
 ##################################################TAXI####################################################################################
+class TaxiViewSet(viewsets.ModelViewSet):
+    queryset = Taxi.objects.all()
+    serializer_class = TaxiSerializer
+
 class TaxiView(APIView):
     def get_taxi(self, pk):
         try:

@@ -48,6 +48,7 @@ const Course = () => {
                         <th>Numero course</th>
                         <th>Depart</th>
                         <th>Destination</th>
+                        <th>Description</th>
                         <th>Montant</th>
                         <th>Utilisateur</th>
                         <th>Date</th>
@@ -60,6 +61,12 @@ const Course = () => {
                             <td>{crs.id}</td>
                             <td>{crs.depart}</td>
                             <td>{crs.destination}</td>
+                            <td>{crs.description.split('\n').map((line, index) => (
+                                <React.Fragment key={index}>
+                                    {line}
+                                    <br />
+                                </React.Fragment>
+                            ))}</td>
                             <td>{crs.montant}</td>
                             <td>{crs.user}</td>
                             <td>{crs.date}</td>
@@ -69,7 +76,7 @@ const Course = () => {
                                     onClick={event => handleUpdate(event, crs)}>
                                     <FaEdit />
                                 </Button>
-                                
+
 
                                 <UpdateCourseModal show={editModalShow} onHide={EditModalClose}
                                     course={editCourse} setUpdated={setIsUpdated}>

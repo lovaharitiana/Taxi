@@ -33,7 +33,7 @@ class UserSerializer(serializers.ModelSerializer):
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = ('id','depart', 'destination', 'distance', 'montant', 'user','taxi','date')
+        fields = ('id','depart', 'destination', 'distance', 'montant', 'user','taxi','date','description')
        
 
 class ChauffeurSerializer(serializers.ModelSerializer):

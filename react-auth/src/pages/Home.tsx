@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import axios from 'axios';
 import { addCourse } from '../services/CourseService';
-import { Button, Modal, Row, Col, Form } from "react-bootstrap";
+import { Button, Modal, Row, Col, Form, FormControl } from "react-bootstrap";
 // import { useNavigate } from 'react-router-dom';
 
 
@@ -56,6 +56,11 @@ const Home = (props: any) => {
                     <Form.Control type="text" name="destination" required placeholder=""></Form.Control>
                 </Form.Group>
 
+                <Form.Group controlId="description">
+                    <Form.Label>Description</Form.Label>
+                    <Form.Control type="text" as="textarea" rows={parseInt('5', 10)} name="description" required placeholder="Veuillez suivre les instructions à noter à droite de votre écran pour donner plus d'indication pour notre chauffeur, s'il vous plaît!! "></Form.Control>
+                </Form.Group>
+
                 <Form.Group controlId="date">
 
                     <Form.Control type="hidden" name="date" required placeholder="" value={currentDate.toISOString().substr(0, 10)}></Form.Control>
@@ -87,7 +92,7 @@ const Home = (props: any) => {
 
                     <Form.Group controlId="montant">
                         <Form.Label>Tarif</Form.Label>
-                        <Form.Control type="number" name="montant" required placeholder="" value={distance * 1000}></Form.Control>
+                        <Form.Control type="number" name="montant" required placeholder="" value={distance * 1500}></Form.Control>
                         <div>
                             <h2>Arrivé du taxi dans: {estimatedTimeInMinutes} minutes</h2>
                         </div>

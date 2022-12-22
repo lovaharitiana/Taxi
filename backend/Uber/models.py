@@ -82,6 +82,7 @@ class Course(models.Model):
     distance = models.IntegerField(default=1)
     montant = models.IntegerField(default=1)
     date = models.DateField(default=timezone.now)
+    description = models.TextField(max_length=255, default="Description de la course")
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     taxi = models.ForeignKey(Taxi, on_delete=models.CASCADE, blank=True, null=True, to_field="numImm", db_column="numImm")
     

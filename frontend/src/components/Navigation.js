@@ -71,6 +71,7 @@ const Navigation = () => {
             <NavLink exact to="/course" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="list">Course list</CDBSidebarMenuItem>
             </NavLink>
+            
            
           </CDBSidebarMenu>
         </CDBSidebarContent>

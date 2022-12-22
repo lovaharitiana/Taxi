@@ -7,6 +7,7 @@ export function addCourse(course) {
         destination:course.destination.value,
         distance:course.distance.value,
         montant:course.montant.value,
+        description: course.description.value,
         user:localStorage.getItem("id"),
         date:course.date.value
     })
