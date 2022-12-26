@@ -24,7 +24,7 @@ class Categorie(models.Model):
 class Permi(models.Model): 
     numPer = models.CharField(max_length=10, primary_key=True)
     date = models.DateField()
-    Categorie = models.ManyToManyField(Categorie)
+    categorie = models.ManyToManyField(Categorie)
 
 
 
@@ -81,7 +81,7 @@ class Course(models.Model):
     destination = models.CharField(max_length=30)
     distance = models.IntegerField(default=1)
     montant = models.IntegerField(default=1)
-    date = models.DateField(default=timezone.now)
+    dateCrs = models.DateField(default=timezone.now)
     description = models.TextField(max_length=255, default="Description de la course")
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     taxi = models.ForeignKey(Taxi, on_delete=models.CASCADE, blank=True, null=True, to_field="numImm", db_column="numImm")

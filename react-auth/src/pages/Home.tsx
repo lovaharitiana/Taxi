@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import axios from 'axios';
 import { addCourse } from '../services/CourseService';
 import { Button, Modal, Row, Col, Form, FormControl } from "react-bootstrap";
+import { TileLayer, TileLayerProps, MapContainer } from 'react-leaflet';
 // import { useNavigate } from 'react-router-dom';
 
 
@@ -41,33 +42,40 @@ const Home = (props: any) => {
     }, [distance, speed]);
 
     return (
-        <div className="container">
+        <div>
+            <MapContainer center={[-21.4534, 47.0761]} zoom={13}>
+                <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                />
+            </MapContainer>
+            <div className="container">
 
 
-            <Form onSubmit={handleSubmit}>
+                <Form onSubmit={handleSubmit}>
 
-                <Form.Group controlId="depart">
-                    <Form.Label>Depart</Form.Label>
-                    <Form.Control type="text" name="depart" required placeholder=""></Form.Control>
-                </Form.Group>
+                    <Form.Group controlId="depart">
+                        <Form.Label>Depart</Form.Label>
+                        <Form.Control type="text" name="depart" required placeholder=""></Form.Control>
+                    </Form.Group>
 
-                <Form.Group controlId="destination">
-                    <Form.Label>Destination</Form.Label>
-                    <Form.Control type="text" name="destination" required placeholder=""></Form.Control>
-                </Form.Group>
+                    <Form.Group controlId="destination">
+                        <Form.Label>Destination</Form.Label>
+                        <Form.Control type="text" name="destination" required placeholder=""></Form.Control>
+                    </Form.Group>
 
-                <Form.Group controlId="description">
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control type="text" as="textarea" rows={parseInt('5', 10)} name="description" required placeholder="Veuillez suivre les instructions à noter à droite de votre écran pour donner plus d'indication pour notre chauffeur, s'il vous plaît!! "></Form.Control>
-                </Form.Group>
+                    <Form.Group controlId="description">
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control type="text" as="textarea" rows={parseInt('5', 10)} name="description" required placeholder="Veuillez suivre les instructions à noter à droite de votre écran pour donner plus d'indication pour notre chauffeur, s'il vous plaît!! "></Form.Control>
+                    </Form.Group>
 
-                <Form.Group controlId="date">
+                    <Form.Group controlId="dateCrs">
 
-                    <Form.Control type="hidden" name="date" required placeholder="" value={currentDate.toISOString().substr(0, 10)}></Form.Control>
+                        <Form.Control type="hidden" name="dateCrs" required placeholder="" value={currentDate.toISOString().substr(0, 10)}></Form.Control>
 
-                </Form.Group>
+                    </Form.Group>
 
-                {/* <Form.Group controlId="distance">
+                    {/* <Form.Group controlId="distance">
                     <Form.Label>Distance</Form.Label>
                     <Form.Control type="text" name="distance" required placeholder=""></Form.Control>
                 </Form.Group> */}
@@ -75,41 +83,42 @@ const Home = (props: any) => {
 
 
 
-                <Form.Group>
-                    <p></p>
-                    <Button variant="primary" onClick={handleCalculer}>
-                        Calculez
-                    </Button>
-                </Form.Group>
-
-                {show && <Form.Group controlId="calcul">
-                    <Form.Group controlId="distance">
-
-                        <Form.Control type="hidden" name="distance" required placeholder="" value={distance}></Form.Control>
-
-                    </Form.Group>
-
-
-                    <Form.Group controlId="montant">
-                        <Form.Label>Tarif</Form.Label>
-                        <Form.Control type="number" name="montant" required placeholder="" value={distance * 1500}></Form.Control>
-                        <div>
-                            <h2>Arrivé du taxi dans: {estimatedTimeInMinutes} minutes</h2>
-                        </div>
-                    </Form.Group>
-
                     <Form.Group>
                         <p></p>
-                        <Button variant="primary" type="submit">
-                            Envoyer
+                        <Button variant="primary" onClick={handleCalculer}>
+                            Calculez
                         </Button>
                     </Form.Group>
-                </Form.Group>}
+
+                    {show && <Form.Group controlId="calcul">
+                        <Form.Group controlId="distance">
+
+                            <Form.Control type="hidden" name="distance" required placeholder="" value={distance}></Form.Control>
+
+                        </Form.Group>
+
+
+                        <Form.Group controlId="montant">
+                            <Form.Label>Tarif</Form.Label>
+                            <Form.Control type="number" name="montant" required placeholder="" value={distance * 1500}></Form.Control>
+                            <div>
+                                <h2>Arrivé du taxi dans: {estimatedTimeInMinutes} minutes</h2>
+                            </div>
+                        </Form.Group>
+
+                        <Form.Group>
+                            <p></p>
+                            <Button variant="primary" type="submit">
+                                Envoyer
+                            </Button>
+                        </Form.Group>
+                    </Form.Group>}
 
 
 
-            </Form>
+                </Form>
 
+            </div>
         </div>
     );
 };

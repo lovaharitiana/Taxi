@@ -69,7 +69,7 @@ const Course = () => {
                             ))}</td>
                             <td>{crs.montant}</td>
                             <td>{crs.user}</td>
-                            <td>{crs.date}</td>
+                            <td>{crs.dateCrs}</td>
                             <td>{crs.taxi}</td>
                             <td>
                                 <Button className="mr-2" variant="warning"

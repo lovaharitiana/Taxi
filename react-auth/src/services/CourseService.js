@@ -9,7 +9,7 @@ export function addCourse(course) {
         montant:course.montant.value,
         description: course.description.value,
         user:localStorage.getItem("id"),
-        date:course.date.value
+        dateCrs:course.dateCrs.value
     })
         .then(response => response.data)
 }
