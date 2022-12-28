@@ -3,17 +3,17 @@ import logo from './logo.svg';
 import axios from 'axios';
 import { addCourse } from '../services/CourseService';
 import { Button, Modal, Row, Col, Form, FormControl } from "react-bootstrap";
-import { TileLayer, TileLayerProps, MapContainer } from 'react-leaflet';
+import { TileLayer, TileLayerProps, MapContainer, useMapEvents } from 'react-leaflet';
 // import { useNavigate } from 'react-router-dom';
+import 'leaflet/dist/leaflet.css';
+import L, { icon } from 'leaflet';
+import { LatLng } from 'leaflet';
+import { Popup, Marker } from 'react-leaflet';
 
 
 const Home = (props: any) => {
     const [show, setShow] = useState(false)
 
-    // const history = useNavigate();
-
-    // const currentUrl = history.location.pathname;
-    // const userId = currentUrl.split('/user')[2];
     const [distance, setDistance] = useState(0)
     const [speed, setSpeed] = useState(2);
     const [estimatedTime, setEstimatedTime] = useState(0);
@@ -36,22 +36,84 @@ const Home = (props: any) => {
         setShow(true);
         setDistance(Math.floor(Math.random() * 10) + 1)
     }
+    const [selectedPosition, setSelectedPosition] = useState<[number, number]>([0, 0]);
+    const Markers = () => {
+
+        const map = useMapEvents({
+            click(e) {
+                // setSelectedPosition([
+                //     e.latlng.lat,
+                //     e.latlng.lng
+
+
+                // ]);     
+                const lat = e.latlng.lat;
+                const lng = e.latlng.lng;
+
+                const departInput = document.getElementById('depart') as HTMLInputElement;
+                if (departInput) {
+                  departInput.value = `${lat}, ${lng}`;
+                }
+                
+                const destinationInput = document.getElementById('destination') as HTMLInputElement;
+                if (destinationInput) {
+                  destinationInput.value = `${lat}, ${lng}`;
+                }
+
+            },
+        })
+
+
+        return (
+            selectedPosition ?
+                <Marker
+                    key={selectedPosition[0]}
+                    position={selectedPosition}
+                    interactive={false}
+                >
+
+                </Marker >
+                : null
+        )
+
+    }
+
 
     useEffect(() => {
         setEstimatedTime(distance / speed);
     }, [distance, speed]);
 
+    // const [position, setPosition] = useState<LatLng | null>(null);
+    // const map = useMapEvents({
+    //   click() {
+    //     map.locate()
+    //   },
+    //   locationfound(e) {
+    //     setPosition(e.latlng)
+    //     map.flyTo(e.latlng, map.getZoom())
+    //   },
+    // })
+
     return (
         <div>
-            <MapContainer center={[-21.4534, 47.0761]} zoom={13}>
-                <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                />
-            </MapContainer>
+
             <div className="container">
 
-
+                <MapContainer center={[-21.4534, 47.0761]} zoom={13} style={{ width: '850px', height: '600px' }}>
+                    <TileLayer
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    />
+                    <Markers />
+                    {/* {latLng && (
+                        <Marker position={latLng}>
+                            <Popup>
+                                Latitude: {latLng.lat}<br />
+                                Longitude: {latLng.lng}
+                            </Popup>
+                        </Marker>
+                    )} */}
+                </MapContainer>
                 <Form onSubmit={handleSubmit}>
 
                     <Form.Group controlId="depart">
@@ -66,7 +128,7 @@ const Home = (props: any) => {
 
                     <Form.Group controlId="description">
                         <Form.Label>Description</Form.Label>
-                        <Form.Control type="text" as="textarea" rows={parseInt('5', 10)} name="description" required placeholder="Veuillez suivre les instructions à noter à droite de votre écran pour donner plus d'indication pour notre chauffeur, s'il vous plaît!! "></Form.Control>
+                        <Form.Control type="text" as="textarea" rows={parseInt('5', 10)} name="description" required placeholder="Indication pour notre chauffeur "></Form.Control>
                     </Form.Group>
 
                     <Form.Group controlId="dateCrs">
@@ -75,10 +137,10 @@ const Home = (props: any) => {
 
                     </Form.Group>
 
-                    {/* <Form.Group controlId="distance">
-                    <Form.Label>Distance</Form.Label>
-                    <Form.Control type="text" name="distance" required placeholder=""></Form.Control>
-                </Form.Group> */}
+                    <Form.Group controlId="distance">
+                        <Form.Label>Distance</Form.Label>
+                        <Form.Control type="text" name="distance" required placeholder=""></Form.Control>
+                    </Form.Group>
 
 
 
