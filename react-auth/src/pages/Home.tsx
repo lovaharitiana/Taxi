@@ -4,14 +4,17 @@ import axios from 'axios';
 import { addCourse } from '../services/CourseService';
 import { Button, Modal, Row, Col, Form, FormControl } from "react-bootstrap";
 import { TileLayer, TileLayerProps, MapContainer, useMapEvents } from 'react-leaflet';
-// import { useNavigate } from 'react-router-dom';
+
 import 'leaflet/dist/leaflet.css';
 import L, { icon } from 'leaflet';
 import { LatLng } from 'leaflet';
 import { Popup, Marker } from 'react-leaflet';
+import { type } from '@testing-library/user-event/dist/type';
 
 
 const Home = (props: any) => {
+
+
     const [show, setShow] = useState(false)
 
     const [distance, setDistance] = useState(0)
@@ -37,82 +40,107 @@ const Home = (props: any) => {
         setDistance(Math.floor(Math.random() * 10) + 1)
     }
     const [selectedPosition, setSelectedPosition] = useState<[number, number]>([0, 0]);
+
+   
+
     const Markers = () => {
 
+
+
+        const [firstClick, setFirstClick] = useState<[number, number] | null>(null);
+
+        const getPlaceName = async (lat: number, lng: number) => {
+            try {
+                const response = await axios.get(
+                    `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`
+                );
+                const data = response.data;
+                if (data.display_name) {
+                    return data.display_name;
+                } else {
+                    throw new Error('Nominatim API request failed');
+                }
+            } catch (error) {
+                console.error(error);
+                return null;
+            }
+        };
         const map = useMapEvents({
-            click(e) {
-                // setSelectedPosition([
-                //     e.latlng.lat,
-                //     e.latlng.lng
+            async click(e) {
 
-
-                // ]);     
                 const lat = e.latlng.lat;
                 const lng = e.latlng.lng;
+                const placeName = await getPlaceName(lat, lng);
+                // if (departInput) {
+                //   departInput.value = `${lat}, ${lng}`;
+                // }
 
-                const departInput = document.getElementById('depart') as HTMLInputElement;
-                if (departInput) {
-                  departInput.value = `${lat}, ${lng}`;
+                 // if (destinationInput) {
+                //   destinationInput.value = `${lat}, ${lng}`;
+                // }
+                if (placeName){
+                    if (firstClick === null) {
+                         const departInput = document.getElementById('depart') as HTMLInputElement;
+               
+                        if (departInput) {
+                            departInput.value = placeName;
+                        }
+                        // Update the firstClick state variable with the clicked position
+                        setFirstClick([lat, lng]);
+                    } else {
+                        const destinationInput = document.getElementById('destination') as HTMLInputElement;
+               
+                        if (destinationInput) {
+                            destinationInput.value = placeName;
+                        }
+                        setFirstClick(null);
+                    }
                 }
-                
-                const destinationInput = document.getElementById('destination') as HTMLInputElement;
-                if (destinationInput) {
-                  destinationInput.value = `${lat}, ${lng}`;
-                }
-
             },
-        })
-
-
+        });
         return (
-            selectedPosition ?
-                <Marker
-                    key={selectedPosition[0]}
-                    position={selectedPosition}
-                    interactive={false}
-                >
+            // Render a marker at the position of the first click, if it exists
+            firstClick ? (
+                <Marker key={firstClick[0]} position={firstClick} interactive={false} />
+            ) : null
+        );
+    };
 
-                </Marker >
-                : null
-        )
+    //     return (
+    //         selectedPosition ?
+    //             <Marker
+    //                 key={selectedPosition[0]}
+    //                 position={selectedPosition}
+    //                 interactive={false}
+    //             >
 
-    }
+    //             </Marker >
+    //             : null
+    //     )
+
+    // }
 
 
     useEffect(() => {
         setEstimatedTime(distance / speed);
     }, [distance, speed]);
 
-    // const [position, setPosition] = useState<LatLng | null>(null);
-    // const map = useMapEvents({
-    //   click() {
-    //     map.locate()
-    //   },
-    //   locationfound(e) {
-    //     setPosition(e.latlng)
-    //     map.flyTo(e.latlng, map.getZoom())
-    //   },
-    // })
+
+
+
 
     return (
         <div>
 
             <div className="container">
 
-                <MapContainer center={[-21.4534, 47.0761]} zoom={13} style={{ width: '850px', height: '600px' }}>
+                <MapContainer center={[-21.4534, 47.0761]} zoom={14} style={{ width: '850px', height: '600px' }}>
                     <TileLayer
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     />
                     <Markers />
-                    {/* {latLng && (
-                        <Marker position={latLng}>
-                            <Popup>
-                                Latitude: {latLng.lat}<br />
-                                Longitude: {latLng.lng}
-                            </Popup>
-                        </Marker>
-                    )} */}
+
                 </MapContainer>
                 <Form onSubmit={handleSubmit}>
 
@@ -120,6 +148,10 @@ const Home = (props: any) => {
                         <Form.Label>Depart</Form.Label>
                         <Form.Control type="text" name="depart" required placeholder=""></Form.Control>
                     </Form.Group>
+
+
+
+
 
                     <Form.Group controlId="destination">
                         <Form.Label>Destination</Form.Label>
@@ -139,7 +171,7 @@ const Home = (props: any) => {
 
                     <Form.Group controlId="distance">
                         <Form.Label>Distance</Form.Label>
-                        <Form.Control type="text" name="distance" required placeholder=""></Form.Control>
+                        <Form.Control type="hidden" name="distance" required placeholder=""></Form.Control>
                     </Form.Group>
 
 
