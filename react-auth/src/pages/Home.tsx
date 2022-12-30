@@ -13,17 +13,18 @@ import { type } from '@testing-library/user-event/dist/type';
 
 
 const Home = (props: any) => {
-
-
+    const [depart, setDepart] = useState(0);
+    const [calculMontant, setCalculMontant] = useState(0);
     const [show, setShow] = useState(false)
-
-    const [distance, setDistance] = useState(0)
+    
+    // const [distance, setDistance] = useState(0)
     const [speed, setSpeed] = useState(2);
     const [estimatedTime, setEstimatedTime] = useState(0);
     const currentDate = new Date();
-    const estimatedTimeInMinutes = Math.ceil(estimatedTime * 5);
+    const estimatedTimeInMinutes = Math.ceil(estimatedTime * 40);
     const handleSubmit = (e: { preventDefault: () => void; target: any; }) => {
         e.preventDefault();
+// console.log(e.target.value);
 
         addCourse(e.target)
             .then((result) => {
@@ -36,12 +37,24 @@ const Home = (props: any) => {
     }
     const handleCalculer = (e: { preventDefault: () => void; target: any; }) => {
         e.preventDefault();
+
+        
+        const depart = document.getElementById('depart') ;
+        const destination = document.getElementById('destination') ;
+        const description = document.getElementById('destination');
+   
+        if (!depart || !destination || !description) {
+            // Return from the function if any of the form elements are empty
+            return;
+        }
+
         setShow(true);
-        setDistance(Math.floor(Math.random() * 10) + 1)
+       
+        // setDistance(Math.floor(Math.random() * 10) + 1)
     }
     const [selectedPosition, setSelectedPosition] = useState<[number, number]>([0, 0]);
 
-   
+
 
     const Markers = () => {
 
@@ -56,7 +69,7 @@ const Home = (props: any) => {
                 );
                 const data = response.data;
                 if (data.display_name) {
-                    return data.display_name;
+                    return data.display_name.split(',')[0];
                 } else {
                     throw new Error('Nominatim API request failed');
                 }
@@ -75,28 +88,59 @@ const Home = (props: any) => {
                 //   departInput.value = `${lat}, ${lng}`;
                 // }
 
-                 // if (destinationInput) {
+                // if (destinationInput) {
                 //   destinationInput.value = `${lat}, ${lng}`;
                 // }
-                if (placeName){
+                if (placeName) {
                     if (firstClick === null) {
-                         const departInput = document.getElementById('depart') as HTMLInputElement;
-               
+                        const departInput = document.getElementById('depart') as HTMLInputElement;
+                       
+
                         if (departInput) {
                             departInput.value = placeName;
+                            console.log( departInput.value);
+                            
                         }
                         // Update the firstClick state variable with the clicked position
                         setFirstClick([lat, lng]);
                     } else {
                         const destinationInput = document.getElementById('destination') as HTMLInputElement;
-               
+
                         if (destinationInput) {
                             destinationInput.value = placeName;
                         }
                         setFirstClick(null);
+
+                        // Calculate the distance between the two positions
+                        const departPos = new LatLng(firstClick[0], firstClick[1]);
+                        const destinationPos = new LatLng(lat, lng);
+                        const distanceInMeters = Number(departPos.distanceTo(destinationPos));
+                        const distanceInKilometers = distanceInMeters / 1000;
+                        const distanceInKilometersRounded = distanceInKilometers.toFixed(2); // round to 
+                        console.log(distanceInKilometersRounded);
+
+                        setCalculMontant(Number((Number(distanceInKilometersRounded) * 10000).toFixed(2).toString()));
+                        console.log(calculMontant);
+
+
+                        const distanceElement = document.getElementById('distance') as HTMLInputElement;
+                        if (distanceElement) {
+                            distanceElement.value = distanceInKilometersRounded.toString();
+                        }
+                        // Calculate the estimated time based on the distance and speed
+                        const timeInHours = distanceInKilometers / speed;
+                        const timeInMinutes = Math.ceil(timeInHours) * 60;
+                        setEstimatedTime(timeInHours);
+                        console.log(timeInMinutes);
+
+                        // Show the modal with the calculated distance and estimated time
+                        //  setShow(true);
                     }
                 }
+
+
             },
+
         });
         return (
             // Render a marker at the position of the first click, if it exists
@@ -121,9 +165,9 @@ const Home = (props: any) => {
     // }
 
 
-    useEffect(() => {
-        setEstimatedTime(distance / speed);
-    }, [distance, speed]);
+    // useEffect(() => {
+    //     setEstimatedTime(distance / speed);
+    // }, [distance, speed]);
 
 
 
@@ -169,12 +213,12 @@ const Home = (props: any) => {
 
                     </Form.Group>
 
+                    
+
                     <Form.Group controlId="distance">
                         <Form.Label>Distance</Form.Label>
-                        <Form.Control type="hidden" name="distance" required placeholder=""></Form.Control>
+                        <Form.Control type="text" name="distance" required placeholder="" ></Form.Control>
                     </Form.Group>
-
-
 
 
                     <Form.Group>
@@ -184,17 +228,18 @@ const Home = (props: any) => {
                         </Button>
                     </Form.Group>
 
-                    {show && <Form.Group controlId="calcul">
-                        <Form.Group controlId="distance">
+                    {show ? ( <Form.Group controlId="calcul">
+                        {/* <Form.Group controlId="distance">
 
-                            <Form.Control type="hidden" name="distance" required placeholder="" value={distance}></Form.Control>
+                            <Form.Control type="hidden" name="distance" required placeholder="" ></Form.Control>
 
-                        </Form.Group>
+                        </Form.Group> */}
+                       
 
 
                         <Form.Group controlId="montant">
-                            <Form.Label>Tarif</Form.Label>
-                            <Form.Control type="number" name="montant" required placeholder="" value={distance * 1500}></Form.Control>
+                            <Form.Label>Tarif(Ariary)</Form.Label>
+                            <Form.Control type="number" name="montant" required placeholder="" value={calculMontant}></Form.Control>
                             <div>
                                 <h2>Arrivé du taxi dans: {estimatedTimeInMinutes} minutes</h2>
                             </div>
@@ -206,7 +251,7 @@ const Home = (props: any) => {
                                 Envoyer
                             </Button>
                         </Form.Group>
-                    </Form.Group>}
+                    </Form.Group>): null}
 
 
 
