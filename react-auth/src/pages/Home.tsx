@@ -13,8 +13,14 @@ import { type } from '@testing-library/user-event/dist/type';
 
 
 const Home = (props: any) => {
-    const [depart, setDepart] = useState(0);
+    const [firstClick, setFirstClick] = useState<[number, number] | null>(null);
+    const [departValue, setDepartValue] = useState('');
+    const [destinationValue, setDestinationValue] = useState('');
+    const [distanceValue, setDistanceValue] = useState(0);
     const [calculMontant, setCalculMontant] = useState(0);
+   console.log(distanceValue, destinationValue, departValue, calculMontant);
+   
+   
     const [show, setShow] = useState(false)
     
     // const [distance, setDistance] = useState(0)
@@ -26,14 +32,16 @@ const Home = (props: any) => {
         e.preventDefault();
 // console.log(e.target.value);
 
-        addCourse(e.target)
+        addCourse(e.target, distanceValue, destinationValue, departValue, calculMontant)
             .then((result) => {
                 alert(result);
-                props.setUpdated(true);
-            },
-                (error) => {
-                    alert("Failed to add Course");
-                });
+                // props.setUpdated(true);
+                console.log(props)
+            }).catch ((error) => {
+                alert("Failed to add Course");
+                console.log(error)
+            });
+                
     }
     const handleCalculer = (e: { preventDefault: () => void; target: any; }) => {
         e.preventDefault();
@@ -60,7 +68,7 @@ const Home = (props: any) => {
 
 
 
-        const [firstClick, setFirstClick] = useState<[number, number] | null>(null);
+        
 
         const getPlaceName = async (lat: number, lng: number) => {
             try {
@@ -94,11 +102,14 @@ const Home = (props: any) => {
                 if (placeName) {
                     if (firstClick === null) {
                         const departInput = document.getElementById('depart') as HTMLInputElement;
-                       
 
+                      
                         if (departInput) {
                             departInput.value = placeName;
-                            console.log( departInput.value);
+                            // console.log( departInput.value);
+                            // localStorage.setItem("depart", JSON.stringify(departInput.value));
+                            setDepartValue(departInput.value);
+                            
                             
                         }
                         // Update the firstClick state variable with the clicked position
@@ -108,6 +119,8 @@ const Home = (props: any) => {
 
                         if (destinationInput) {
                             destinationInput.value = placeName;
+                            localStorage.setItem("destination", JSON.stringify(destinationInput.value));
+                            setDestinationValue(destinationInput.value);
                         }
                         setFirstClick(null);
 
@@ -118,11 +131,14 @@ const Home = (props: any) => {
                         const distanceInKilometers = distanceInMeters / 1000;
                         const distanceInKilometersRounded = distanceInKilometers.toFixed(2); // round to 
                         console.log(distanceInKilometersRounded);
-
+                        localStorage.setItem("distance", JSON.stringify(distanceInKilometersRounded));
+                        setDistanceValue(+ distanceInKilometersRounded);
                         setCalculMontant(Number((Number(distanceInKilometersRounded) * 10000).toFixed(2).toString()));
-                        console.log(calculMontant);
-
-
+                        console.log(Number((Number(distanceInKilometersRounded) * 10000).toFixed(2).toString()));
+                        localStorage.setItem("montant", JSON.stringify(Number((Number(distanceInKilometersRounded) * 10000).toFixed(2).toString())));
+                        
+                       
+                       
                         const distanceElement = document.getElementById('distance') as HTMLInputElement;
                         if (distanceElement) {
                             distanceElement.value = distanceInKilometersRounded.toString();
@@ -142,6 +158,7 @@ const Home = (props: any) => {
             },
 
         });
+       
         return (
             // Render a marker at the position of the first click, if it exists
             firstClick ? (
@@ -170,7 +187,7 @@ const Home = (props: any) => {
     // }, [distance, speed]);
 
 
-
+    
 
 
     return (
@@ -190,7 +207,7 @@ const Home = (props: any) => {
 
                     <Form.Group controlId="depart">
                         <Form.Label>Depart</Form.Label>
-                        <Form.Control type="text" name="depart" required placeholder=""></Form.Control>
+                        <Form.Control value={departValue} type="text" name="depart" placeholder="" ></Form.Control>
                     </Form.Group>
 
 
@@ -199,7 +216,7 @@ const Home = (props: any) => {
 
                     <Form.Group controlId="destination">
                         <Form.Label>Destination</Form.Label>
-                        <Form.Control type="text" name="destination" required placeholder=""></Form.Control>
+                        <Form.Control value={destinationValue} type="text" name="destination" placeholder=""></Form.Control>
                     </Form.Group>
 
                     <Form.Group controlId="description">
@@ -217,7 +234,7 @@ const Home = (props: any) => {
 
                     <Form.Group controlId="distance">
                         <Form.Label>Distance</Form.Label>
-                        <Form.Control type="text" name="distance" required placeholder="" ></Form.Control>
+                        <Form.Control value={distanceValue} type="text" name="distance"  placeholder="" ></Form.Control>
                     </Form.Group>
 
 

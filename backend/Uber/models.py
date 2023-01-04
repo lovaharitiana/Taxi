@@ -79,7 +79,7 @@ class Taxi(models.Model):
 class Course(models.Model):
     depart = models.CharField(max_length=30)
     destination = models.CharField(max_length=30)
-    distance = models.IntegerField(default=1)
+    distance = models.FloatField(default=0.0)
     montant = models.IntegerField(default=1)
     dateCrs = models.DateField(default=timezone.now)
     description = models.TextField(max_length=255, default="Description de la course")
