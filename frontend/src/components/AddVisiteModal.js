@@ -6,7 +6,7 @@ import { addVisite } from '../services/VisiteService';
 const AddVisiteModal = (props) => {
     const [taxis, setTaxis] = useState([]);
     const [isUpdated, setIsUpdated] = useState(false);
-
+    // TAXI
     useEffect(() => {
         let mounted = true;
         if (taxis.length && !isUpdated) {
@@ -32,7 +32,7 @@ const AddVisiteModal = (props) => {
                 props.setUpdated(true);
             },
                 (error) => {
-                    alert("Failed to add Visite");
+                    alert("Erreur d'ajout de visite");
                 });
     }
     return (

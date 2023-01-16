@@ -10,12 +10,15 @@ export function addChauffeur(chauffeur) {
         numChf: null,
         nomChf: chauffeur.nomChf.value,
         prenomChf: chauffeur.prenomChf.value,
-        date_naissance: chauffeur.date_naissance.value,
-        lieu_naissance: chauffeur.lieu_naissance.value,
         adresse: chauffeur.adresse.value,
-        profession: chauffeur.profession.value,
-        permi:chauffeur.numPer.value,
-        capacite:chauffeur.numCap.value,
+        permis: chauffeur.permis.value,
+        capacite: chauffeur.capacite.value,
+        // date_naissance: chauffeur.date_naissance.value,
+        // lieu_naissance: chauffeur.lieu_naissance.value,
+        // adresse: chauffeur.adresse.value,
+        // profession: chauffeur.profession.value,
+        // permi:chauffeur.numPer.value,
+        // capacite:chauffeur.numCap.value,
     })
         .then(response => response.data)
 }
@@ -24,10 +27,13 @@ export function updateChauffeur(chfid, chauffeur) {
     return axios.put('http://127.0.0.1:8000/chauffeurs/' + chfid + '/', {
         nomChf: chauffeur.nomChf.value,
         prenomChf: chauffeur.prenomChf.value,
-        date_naissance: chauffeur.date_naissance.value,
-        lieu_naissance: chauffeur.lieu_naissance.value,
+        // date_naissance: chauffeur.date_naissance.value,
         adresse: chauffeur.adresse.value,
-        profession: chauffeur.profession.value
+        permis: chauffeur.permis.value,
+        capacite: chauffeur.capacite.value,
+        // lieu_naissance: chauffeur.lieu_naissance.value,
+        // adresse: chauffeur.adresse.value,
+        // profession: chauffeur.profession.value
     })
         .then(response => response.data)
 }

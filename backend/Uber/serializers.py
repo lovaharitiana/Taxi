@@ -1,6 +1,6 @@
 from rest_framework import serializers
 #from django.contrib.auth.models import User
-from .models import Chauffeur, Taxi, Carte_grise, Visite, Assurance, Agence, Capacite, Permi, Categorie, User, Course
+from .models import Chauffeur, Taxi, Visite, Assurance, Agence, User, Course
 #from rest_framework.authtoken.models import Token
 #class UserSerializer(serializers.ModelSerializer):
     #class Meta:
@@ -39,19 +39,19 @@ class CourseSerializer(serializers.ModelSerializer):
 class ChauffeurSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Chauffeur
-        fields = ('numChf','nomChf','prenomChf','date_naissance','lieu_naissance','adresse','profession','permi', 'capacite')
+        fields = ('numChf','nomChf','prenomChf','adresse', 'permis', 'capacite')
 
 
 class TaxiSerializer(serializers.ModelSerializer):
     class Meta:
         model = Taxi
-        fields = ('numImm','marque','nb_place','numMoteur','poids_total','poids_vide','charge_utile','carrosserie', 'carte_grise', 'chauffeur')
+        fields = ('numImm','marque','nb_place','carte_grise', 'chauffeur')
 
 
-class Carte_griseSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Carte_grise
-        fields = ('numSerie','date_fabrication')
+# class Carte_griseSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Carte_grise
+#         fields = ('numSerie','date_fabrication')
 
 class VisiteSerializer(serializers.ModelSerializer):
     class Meta:
@@ -69,18 +69,18 @@ class AgenceSerializer(serializers.ModelSerializer):
         model = Agence
         fields = ('numAg','nomAg')
 
-class CapaciteSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Capacite
-        fields = ('numCap','droit','date_certificat', 'permi')
+# class CapaciteSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Capacite
+#         fields = ('numCap','droit','date_certificat', 'permi')
 
-class PermiSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Permi
-        fields = ('numPer','date')
+# class PermiSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Permi
+#         fields = ('numPer','date')
 
-class CategorieSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Categorie
-        fields = ('numCat','type')
+# class CategorieSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Categorie
+#         fields = ('numCat','type')
 

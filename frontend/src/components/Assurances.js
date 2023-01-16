@@ -42,7 +42,7 @@ const Assurances = () => {
     };
 
     const handleDelete = (e, ref) => {
-        if (window.confirm('Are you sure?')) {
+        if (window.confirm('Etes-vous sure?')) {
           e.preventDefault();
           deleteAssurances(ref)
             .then((result) => {
@@ -50,7 +50,7 @@ const Assurances = () => {
               setIsUpdated(true);
             },
               (error) => {
-                alert("Failed to delete Assurance");
+                alert("Erreur de suppression d'assurance");
               }
             )
         }
@@ -61,8 +61,8 @@ const Assurances = () => {
     let EditModalClose = () => setEditModalShow(false);
 
     return (
-        <div className="row side-row">
-            <Table striped bordered hover>
+        <div className="row side-row" >
+            <Table striped bordered hover >
                 <thead>
                     <tr>
 

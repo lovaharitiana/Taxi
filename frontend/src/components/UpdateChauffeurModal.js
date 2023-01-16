@@ -10,7 +10,7 @@ const UpdateChauffeurModal = (props) => {
             props.setUpdated(true);
         },
         (error)=>{
-            alert("Failed to update Chauffeur");
+            alert("Erreur de modification de chauffeur");
         }); 
     }
     return (
@@ -43,19 +43,19 @@ const UpdateChauffeurModal = (props) => {
                                     placeholder=""></Form.Control>
                                 </Form.Group>
 
-                                <Form.Group controlId="date_naissance">
+                                {/* <Form.Group controlId="date_naissance">
                                     <Form.Label>Date de naissance</Form.Label>
                                     <Form.Control type="date" name="date_naissance" required 
                                     defaultValue={props.chauffeur.date_naissance}
                                     placeholder=""></Form.Control>
-                                </Form.Group>
+                                </Form.Group> */}
 
-                                <Form.Group controlId="lieu_naissance">
+                                {/* <Form.Group controlId="lieu_naissance">
                                      <Form.Label>Lieu de naissance</Form.Label>
                                     <Form.Control type="text" name="lieu_naissance" required 
                                     defaultValue={props.chauffeur.lieu_naissance}
                                     placeholder=""></Form.Control>
-                                </Form.Group>
+                                </Form.Group> */}
 
                                 <Form.Group controlId="adresse">
                                     <Form.Label>Adresse</Form.Label>
@@ -64,12 +64,26 @@ const UpdateChauffeurModal = (props) => {
                                     placeholder=""></Form.Control>
                                 </Form.Group>
 
-                                <Form.Group controlId="profession">
+                                <Form.Group controlId="permis">
+                                    <Form.Label>Catégorie permis</Form.Label>
+                                    <Form.Control type="text" name="permis" required 
+                                    defaultValue={props.chauffeur.permis}
+                                    placeholder=""></Form.Control>
+                                </Form.Group>
+
+                                <Form.Group controlId="capacite">
+                                    <Form.Label>Numero capacite</Form.Label>
+                                    <Form.Control type="text" name="capacite" required 
+                                    defaultValue={props.chauffeur.capacite}
+                                    placeholder=""></Form.Control>
+                                </Form.Group>
+
+                                {/* <Form.Group controlId="profession">
                                     <Form.Label>Profession</Form.Label>
                                     <Form.Control type="text" name="profession" required 
                                     defaultValue={props.chauffeur.profession}
                                     placeholder=""></Form.Control>
-                                </Form.Group>
+                                </Form.Group> */}
 
                                 <Form.Group>
                                     <p></p>

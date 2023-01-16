@@ -2,13 +2,11 @@ from rest_framework.views import APIView
 from .serializers import (
     ChauffeurSerializer,
     TaxiSerializer,
-    Carte_griseSerializer,
+    
     VisiteSerializer,
     AssuranceSerializer,
     AgenceSerializer,
-    CapaciteSerializer,
-    PermiSerializer,
-    CategorieSerializer,
+    
     UserSerializer,
     CourseSerializer,
 )
@@ -16,13 +14,11 @@ from django.http.response import JsonResponse
 from .models import (
     Chauffeur,
     Taxi,
-    Carte_grise,
+   
     Visite,
     Assurance,
     Agence,
-    Capacite,
-    Permi,
-    Categorie,
+   
     Course,
     User
 )
@@ -161,7 +157,7 @@ class ChauffeurView(APIView):
             chauffeur = Chauffeur.objects.get(numChf=pk)
             return chauffeur
         except:
-            return JsonResponse("Chauffeur Does Not Exist", safe=False)
+            return JsonResponse("Chauffeur n'existe pas", safe=False)
 
     def get(self, request, pk=None):
         if pk:
@@ -178,8 +174,8 @@ class ChauffeurView(APIView):
 
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse("Chauffeur created successfully", safe=False)
-        return JsonResponse("Failed to add chauffeur", safe=False)
+            return JsonResponse("Chauffeur ajouté avec succes", safe=False)
+        return JsonResponse("Erreur d'ajout de chauffeur", safe=False)
 
     def put(self, request, pk=None):
         chauffeur_to_update = Chauffeur.objects.get(numChf=pk)
@@ -189,13 +185,13 @@ class ChauffeurView(APIView):
 
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse("Chauffeur Updated Successfully", safe=False)
-        return JsonResponse("Failed to Update Chauffeur")
+            return JsonResponse("Chauffeur modifié avec succes", safe=False)
+        return JsonResponse("Erreur de modification de chauffeur")
 
     def delete(self, request, pk=None):
         chauffeur_to_delete = Chauffeur.objects.get(numChf=pk)
         chauffeur_to_delete.delete()
-        return JsonResponse("Chauffeur deleted successfully", safe=False)
+        return JsonResponse("Chauffeur supprimé avec succes", safe=False)
 
 
 ##################################################TAXI####################################################################################
@@ -209,7 +205,7 @@ class TaxiView(APIView):
             taxi = Taxi.objects.get(numImm=pk)
             return taxi
         except:
-            return JsonResponse("Taxi Does Not Exist", safe=False)
+            return JsonResponse("Taxi n'existe pas", safe=False)
 
     def get(self, request, pk=None):
         if pk:
@@ -226,8 +222,8 @@ class TaxiView(APIView):
 
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse("Taxi created successfully", safe=False)
-        return JsonResponse("Failed to add taxi", safe=False)
+            return JsonResponse("Taxi ajouté avec succes", safe=False)
+        return JsonResponse("Erreur d'ajout de taxi", safe=False)
 
     def put(self, request, pk=None):
         taxi_to_update = Taxi.objects.get(numImm=pk)
@@ -237,57 +233,57 @@ class TaxiView(APIView):
 
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse("Taxi Updated Successfully", safe=False)
-        return JsonResponse("Failed to Update Taxi")
+            return JsonResponse("Taxi modifié avec succes", safe=False)
+        return JsonResponse("Erreur de modification de taxi")
 
     def delete(self, request, pk=None):
         taxi_to_delete = Taxi.objects.get(numImm=pk)
         taxi_to_delete.delete()
-        return JsonResponse("Taxi deleted successfully", safe=False)
+        return JsonResponse("Taxi supprimé avec succes", safe=False)
 
 
 ####################################################CARTE_GRISE###########################################################################
-class Carte_griseView(APIView):
-    def get_Carte_grise(self, pk):
-        try:
-            carte_grise = Carte_grise.objects.get(numSerie=pk)
-            return carte_grise
-        except:
-            return JsonResponse("carte_grise Does Not Exist", safe=False)
+# class Carte_griseView(APIView):
+#     def get_Carte_grise(self, pk):
+#         try:
+#             carte_grise = Carte_grise.objects.get(numSerie=pk)
+#             return carte_grise
+#         except:
+#             return JsonResponse("carte_grise Does Not Exist", safe=False)
 
-    def get(self, request, pk=None):
-        if pk:
-            data = self.get_Carte_grise(pk)
-            serializer = Carte_griseSerializer(data)
-        else:
-            data = Carte_grise.objects.all()
-            serializer = Carte_griseSerializer(data, many=True)
-        return Response(serializer.data)
+#     def get(self, request, pk=None):
+#         if pk:
+#             data = self.get_Carte_grise(pk)
+#             serializer = Carte_griseSerializer(data)
+#         else:
+#             data = Carte_grise.objects.all()
+#             serializer = Carte_griseSerializer(data, many=True)
+#         return Response(serializer.data)
 
-    def post(self, request):
-        data = request.data
-        serializer = Carte_griseSerializer(data=data)
+#     def post(self, request):
+#         data = request.data
+#         serializer = Carte_griseSerializer(data=data)
 
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse("Carte_grise created successfully", safe=False)
-        return JsonResponse("Failed to add Carte_grise", safe=False)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return JsonResponse("Carte_grise created successfully", safe=False)
+#         return JsonResponse("Failed to add Carte_grise", safe=False)
 
-    def put(self, request, pk=None):
-        carte_grise_to_update = Carte_grise.objects.get(numSerie=pk)
-        serializer = Carte_griseSerializer(
-            instance=carte_grise_to_update, data=request.data, partial=True
-        )
+#     def put(self, request, pk=None):
+#         carte_grise_to_update = Carte_grise.objects.get(numSerie=pk)
+#         serializer = Carte_griseSerializer(
+#             instance=carte_grise_to_update, data=request.data, partial=True
+#         )
 
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse("Carte_grise Updated Successfully", safe=False)
-        return JsonResponse("Failed to Update Carte_grise")
+#         if serializer.is_valid():
+#             serializer.save()
+#             return JsonResponse("Carte_grise Updated Successfully", safe=False)
+#         return JsonResponse("Failed to Update Carte_grise")
 
-    def delete(self, request, pk=None):
-        carte_grise_to_delete = Carte_grise.objects.get(numSerie=pk)
-        carte_grise_to_delete.delete()
-        return JsonResponse("Carte_grise deleted successfully", safe=False)
+#     def delete(self, request, pk=None):
+#         carte_grise_to_delete = Carte_grise.objects.get(numSerie=pk)
+#         carte_grise_to_delete.delete()
+#         return JsonResponse("Carte_grise deleted successfully", safe=False)
 
 
 #############################################VISITE###############################################################
@@ -297,7 +293,7 @@ class VisiteView(APIView):
             visite = Visite.objects.get(numVis=pk)
             return visite
         except:
-            return JsonResponse("visite Does Not Exist", safe=False)
+            return JsonResponse("visite n'existe pas", safe=False)
 
     def get(self, request, pk=None):
         if pk:
@@ -314,8 +310,8 @@ class VisiteView(APIView):
 
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse("Visite created successfully", safe=False)
-        return JsonResponse("Failed to add Visite", safe=False)
+            return JsonResponse("Visite ajouté avec succes", safe=False)
+        return JsonResponse("Erreur d'ajout de visite", safe=False)
 
     def put(self, request, pk=None):
         visite_to_update = Visite.objects.get(numVis=pk)
@@ -325,13 +321,13 @@ class VisiteView(APIView):
 
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse("Visite Updated Successfully", safe=False)
-        return JsonResponse("Failed to Update Visite")
+            return JsonResponse("Visite modifié avec succes", safe=False)
+        return JsonResponse("Erreur de modification de visite")
 
     def delete(self, request, pk=None):
         visite_to_delete = Visite.objects.get(numVis=pk)
         visite_to_delete.delete()
-        return JsonResponse("Visite deleted successfully", safe=False)
+        return JsonResponse("Visite supprimé avec succes", safe=False)
 
 
 ##################################################ASSURANCE#######################################################""
@@ -341,7 +337,7 @@ class AssuranceView(APIView):
             assurance = Assurance.objects.get(ref=pk)
             return assurance
         except:
-            return JsonResponse("Assurance Does Not Exist", safe=False)
+            return JsonResponse("Assurance n'existe pas", safe=False)
 
     def get(self, request, pk=None):
         if pk:
@@ -358,8 +354,8 @@ class AssuranceView(APIView):
 
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse("Assurance created successfully", safe=False)
-        return JsonResponse("Failed to add Assurance", safe=False)
+            return JsonResponse("Assurance ajoutée avec succes", safe=False)
+        return JsonResponse("Erreur d'ajout d'assurance", safe=False)
 
     def put(self, request, pk=None):
         assurance_to_update = Assurance.objects.get(ref=pk)
@@ -369,13 +365,13 @@ class AssuranceView(APIView):
 
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse("Assurance Updated Successfully", safe=False)
-        return JsonResponse("Failed to Update Assurance")
+            return JsonResponse("Assurance modifiée avec succes", safe=False)
+        return JsonResponse("Erreur de modification d'assurance")
 
     def delete(self, request, pk=None):
         assurance_to_delete = Assurance.objects.get(ref=pk)
         assurance_to_delete.delete()
-        return JsonResponse("Assurance deleted successfully", safe=False)
+        return JsonResponse("Assurance supprimée avec succes", safe=False)
 
 
 ##########################################AGENCE#####################################################################
@@ -385,7 +381,7 @@ class AgenceView(APIView):
             agence = Agence.objects.get(ref=pk)
             return agence
         except:
-            return JsonResponse("Agence Does Not Exist", safe=False)
+            return JsonResponse("Agence n'existe pas", safe=False)
 
     def get(self, request, pk=None):
         if pk:
@@ -402,8 +398,8 @@ class AgenceView(APIView):
 
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse("Agence created successfully", safe=False)
-        return JsonResponse("Failed to add Agence", safe=False)
+            return JsonResponse("Agence ajoutée avec succes", safe=False)
+        return JsonResponse("Erreur d'ajout d'agence", safe=False)
 
     def put(self, request, pk=None):
         agence_to_update = Agence.objects.get(numAg=pk)
@@ -413,142 +409,142 @@ class AgenceView(APIView):
 
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse("Agence Updated Successfully", safe=False)
-        return JsonResponse("Failed to Update Agence")
+            return JsonResponse("Agence modifiée avec succes", safe=False)
+        return JsonResponse("Erreur de modification de l'agence")
 
     def delete(self, request, pk=None):
         agence_to_delete = Agence.objects.get(numAg=pk)
         agence_to_delete.delete()
-        return JsonResponse("Agence deleted successfully", safe=False)
+        return JsonResponse("Agence supprimée avec succes", safe=False)
 
 
 ########################################CAPACITE####################################################################
-class CapaciteView(APIView):
-    def get_Capacite(self, pk):
-        try:
-            capacite = Capacite.objects.get(numCap=pk)
-            return capacite
-        except:
-            return JsonResponse("Capacite Does Not Exist", safe=False)
+# class CapaciteView(APIView):
+#     def get_Capacite(self, pk):
+#         try:
+#             capacite = Capacite.objects.get(numCap=pk)
+#             return capacite
+#         except:
+#             return JsonResponse("Capacite Does Not Exist", safe=False)
 
-    def get(self, request, pk=None):
-        if pk:
-            data = self.get_Capacite(pk)
-            serializer = CapaciteSerializer(data)
-        else:
-            data = Capacite.objects.all()
-            serializer = CapaciteSerializer(data, many=True)
-        return Response(serializer.data)
+#     def get(self, request, pk=None):
+#         if pk:
+#             data = self.get_Capacite(pk)
+#             serializer = CapaciteSerializer(data)
+#         else:
+#             data = Capacite.objects.all()
+#             serializer = CapaciteSerializer(data, many=True)
+#         return Response(serializer.data)
 
-    def post(self, request):
-        data = request.data
-        serializer = CapaciteSerializer(data=data)
+#     def post(self, request):
+#         data = request.data
+#         serializer = CapaciteSerializer(data=data)
 
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse("Capacite created successfully", safe=False)
-        return JsonResponse("Failed to add Capacite", safe=False)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return JsonResponse("Capacite created successfully", safe=False)
+#         return JsonResponse("Failed to add Capacite", safe=False)
 
-    def put(self, request, pk=None):
-        capacite_to_update = Capacite.objects.get(numCap=pk)
-        serializer = CapaciteSerializer(
-            instance=capacite_to_update, data=request.data, partial=True
-        )
+#     def put(self, request, pk=None):
+#         capacite_to_update = Capacite.objects.get(numCap=pk)
+#         serializer = CapaciteSerializer(
+#             instance=capacite_to_update, data=request.data, partial=True
+#         )
 
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse("Capacite Updated Successfully", safe=False)
-        return JsonResponse("Failed to Update Capacite")
+#         if serializer.is_valid():
+#             serializer.save()
+#             return JsonResponse("Capacite Updated Successfully", safe=False)
+#         return JsonResponse("Failed to Update Capacite")
 
-    def delete(self, request, pk=None):
-        capacite_to_delete = Capacite.objects.get(numCap=pk)
-        capacite_to_delete.delete()
-        return JsonResponse("Capacite deleted successfully", safe=False)
+#     def delete(self, request, pk=None):
+#         capacite_to_delete = Capacite.objects.get(numCap=pk)
+#         capacite_to_delete.delete()
+#         return JsonResponse("Capacite deleted successfully", safe=False)
 
 
 ############################################PERMIS######################################################################
-class PermiView(APIView):
-    def get_Permi(self, pk):
-        try:
-            permi = Permi.objects.get(numPer=pk)
-            return permi
-        except:
-            return JsonResponse("Permi Does Not Exist", safe=False)
+# class PermiView(APIView):
+#     def get_Permi(self, pk):
+#         try:
+#             permi = Permi.objects.get(numPer=pk)
+#             return permi
+#         except:
+#             return JsonResponse("Permi Does Not Exist", safe=False)
 
-    def get(self, request, pk=None):
-        if pk:
-            data = self.get_Permi(pk)
-            serializer = PermiSerializer(data)
-        else:
-            data = Permi.objects.all()
-            serializer = PermiSerializer(data, many=True)
-        return Response(serializer.data)
+#     def get(self, request, pk=None):
+#         if pk:
+#             data = self.get_Permi(pk)
+#             serializer = PermiSerializer(data)
+#         else:
+#             data = Permi.objects.all()
+#             serializer = PermiSerializer(data, many=True)
+#         return Response(serializer.data)
 
-    def post(self, request):
-        data = request.data
-        serializer = PermiSerializer(data=data)
+#     def post(self, request):
+#         data = request.data
+#         serializer = PermiSerializer(data=data)
 
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse("Permi created successfully", safe=False)
-        return JsonResponse("Failed to add Permi", safe=False)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return JsonResponse("Permi created successfully", safe=False)
+#         return JsonResponse("Failed to add Permi", safe=False)
 
-    def put(self, request, pk=None):
-        permi_to_update = Permi.objects.get(numPer=pk)
-        serializer = PermiSerializer(
-            instance=permi_to_update, data=request.data, partial=True
-        )
+#     def put(self, request, pk=None):
+#         permi_to_update = Permi.objects.get(numPer=pk)
+#         serializer = PermiSerializer(
+#             instance=permi_to_update, data=request.data, partial=True
+#         )
 
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse("Permi Updated Successfully", safe=False)
-        return JsonResponse("Failed to Update Permi")
+#         if serializer.is_valid():
+#             serializer.save()
+#             return JsonResponse("Permi Updated Successfully", safe=False)
+#         return JsonResponse("Failed to Update Permi")
 
-    def delete(self, request, pk=None):
-        permi_to_delete = Permi.objects.get(numPer=pk)
-        permi_to_delete.delete()
-        return JsonResponse("Permi deleted successfully", safe=False)
+#     def delete(self, request, pk=None):
+#         permi_to_delete = Permi.objects.get(numPer=pk)
+#         permi_to_delete.delete()
+#         return JsonResponse("Permi deleted successfully", safe=False)
 
 
 ################################################"CATEGORIE##############################################################
-class CategorieView(APIView):
-    def get_Categorie(self, pk):
-        try:
-            categorie = Categorie.objects.get(numCat=pk)
-            return categorie
-        except:
-            return JsonResponse("Categorie Does Not Exist", safe=False)
+# class CategorieView(APIView):
+#     def get_Categorie(self, pk):
+#         try:
+#             categorie = Categorie.objects.get(numCat=pk)
+#             return categorie
+#         except:
+#             return JsonResponse("Categorie Does Not Exist", safe=False)
 
-    def get(self, request, pk=None):
-        if pk:
-            data = self.get_Categorie(pk)
-            serializer = CategorieSerializer(data)
-        else:
-            data = Categorie.objects.all()
-            serializer = CategorieSerializer(data, many=True)
-        return Response(serializer.data)
+#     def get(self, request, pk=None):
+#         if pk:
+#             data = self.get_Categorie(pk)
+#             serializer = CategorieSerializer(data)
+#         else:
+#             data = Categorie.objects.all()
+#             serializer = CategorieSerializer(data, many=True)
+#         return Response(serializer.data)
 
-    def post(self, request):
-        data = request.data
-        serializer = CategorieSerializer(data=data)
+#     def post(self, request):
+#         data = request.data
+#         serializer = CategorieSerializer(data=data)
 
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse("Categorie created successfully", safe=False)
-        return JsonResponse("Failed to add Categorie", safe=False)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return JsonResponse("Categorie created successfully", safe=False)
+#         return JsonResponse("Failed to add Categorie", safe=False)
 
-    def put(self, request, pk=None):
-        categorie_to_update = Categorie.objects.get(numCat=pk)
-        serializer = CategorieSerializer(
-            instance=categorie_to_update, data=request.data, partial=True
-        )
+#     def put(self, request, pk=None):
+#         categorie_to_update = Categorie.objects.get(numCat=pk)
+#         serializer = CategorieSerializer(
+#             instance=categorie_to_update, data=request.data, partial=True
+#         )
 
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse("Categorie Updated Successfully", safe=False)
-        return JsonResponse("Failed to Update Categorie")
+#         if serializer.is_valid():
+#             serializer.save()
+#             return JsonResponse("Categorie Updated Successfully", safe=False)
+#         return JsonResponse("Failed to Update Categorie")
 
-    def delete(self, request, pk=None):
-        categorie_to_delete = Categorie.objects.get(numCat=pk)
-        categorie_to_delete.delete()
-        return JsonResponse("Categorie deleted successfully", safe=False)
+#     def delete(self, request, pk=None):
+#         categorie_to_delete = Categorie.objects.get(numCat=pk)
+#         categorie_to_delete.delete()
+#         return JsonResponse("Categorie deleted successfully", safe=False)

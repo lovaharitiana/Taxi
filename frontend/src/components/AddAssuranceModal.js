@@ -51,7 +51,7 @@ const handleSubmit = (e) => {
             props.setUpdated(true);
         },
             (error) => {
-                alert("Failed to add Assurance");
+                alert("Erreur d'ajout d'assurance");
             });
 }
 

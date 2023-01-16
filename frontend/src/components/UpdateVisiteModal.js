@@ -1,7 +1,29 @@
 import React from "react";
 import { Button, Modal, Row, Col, Form } from "react-bootstrap";
 import { updateVisite } from '../services/VisiteService';
+import { getTaxis } from "../services/TaxiService";
+import { useEffect, useState } from "react";
+
 const UpdateVisiteModal = (props) => {
+    const [taxis, setTaxis] = useState([]);
+    const [isUpdated, setIsUpdated] = useState(false);
+    // TAXI
+    useEffect(() => {
+        let mounted = true;
+        if (taxis.length && !isUpdated) {
+          return;
+        }
+        getTaxis()
+          .then(data => {
+            if (mounted) {
+              setTaxis(data)
+            }
+          })
+        return () => {
+          mounted = false;
+          setIsUpdated(false);
+        }
+      }, [isUpdated, taxis]);
     const handleSubmit = (e) => {
         e.preventDefault();
         updateVisite(props.visite.numVis, e.target)
@@ -10,7 +32,7 @@ const UpdateVisiteModal = (props) => {
                 props.setUpdated(true);
             },
                 (error) => {
-                    alert("Failed to update Visite");
+                    alert("Erreur de modification de visite");
                 });
     }
     return (
@@ -45,6 +67,15 @@ const UpdateVisiteModal = (props) => {
                                         placeholder=""></Form.Control>
                                 </Form.Group>
 
+                                <p></p>
+                                <Form.Label>Immatriculation</Form.Label>
+                                <Form.Select aria-label="Default select example" name="numImm" >
+                                
+                                    {taxis.map((txs) =>
+
+                                        <option value={txs.numImm}>{txs.numImm}</option>
+                                    )}
+                                </Form.Select>
 
                                 
 

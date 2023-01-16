@@ -1,7 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Modal, Row, Col, Form } from "react-bootstrap";
 import { updateTaxi } from '../services/TaxiService';
+import { getChauffeurs } from "../services/ChauffeurService";
+
 const UpdateTaxiModal = (props) => {
+    const [chauffeurs, setChauffeurs] = useState([]);
+
+    const [isUpdated, setIsUpdated] = useState(false);
+
+    // CHAUFFEUR
+    useEffect(() => {
+        let mounted = true;
+        if (chauffeurs.length && !isUpdated) {
+            return;
+        }
+        getChauffeurs()
+            .then(data => {
+                if (mounted) {
+                    setChauffeurs(data)
+                }
+            })
+        return () => {
+            mounted = false;
+            setIsUpdated(false);
+        }
+    }, [isUpdated, chauffeurs]);
+   
     const handleSubmit = (e) => {
         e.preventDefault();
         updateTaxi(props.taxi.numImm, e.target)
@@ -10,7 +34,7 @@ const UpdateTaxiModal = (props) => {
                 props.setUpdated(true);
             },
                 (error) => {
-                    alert("Failed to update Taxi");
+                    alert("Erreur de modification de taxi");
                 });
     }
     return (
@@ -45,40 +69,56 @@ const UpdateTaxiModal = (props) => {
                                         placeholder=""></Form.Control>
                                 </Form.Group>
 
-                                <Form.Group controlId="numMoteur">
+                                <Form.Group controlId="carte_grise">
+                                    <Form.Label>Carte_grise</Form.Label>
+                                    <Form.Control type="text" name="carte_grise" required
+                                        defaultValue={props.taxi.carte_grise}
+                                        placeholder=""></Form.Control>
+                                </Form.Group>
+                                <p></p>
+                                <Form.Label>Numero Chauffeur</Form.Label>
+                                <Form.Select aria-label="Default select example" name="numChf" >
+                                    {chauffeurs.map((chf) =>
+
+                                        <option value={chf.numChf}>{chf.numChf}</option>
+                                    )}
+                                </Form.Select>
+
+
+                                {/* <Form.Group controlId="numMoteur">
                                     <Form.Label>Numero moteur</Form.Label>
                                     <Form.Control type="text" name="numMoteur" required
                                         defaultValue={props.taxi.numMoteur}
                                         placeholder=""></Form.Control>
-                                </Form.Group>
+                                </Form.Group> */}
 
-                                <Form.Group controlId="poids_total">
+                                {/* <Form.Group controlId="poids_total">
                                     <Form.Label>Poids total</Form.Label>
                                     <Form.Control type="text" name="poids_total" required
                                         defaultValue={props.taxi.poids_total}
                                         placeholder=""></Form.Control>
-                                </Form.Group>
+                                </Form.Group> */}
 
-                                <Form.Group controlId="poids_vide">
+                                {/* <Form.Group controlId="poids_vide">
                                     <Form.Label>Poids à vide</Form.Label>
                                     <Form.Control type="text" name="poids_vide" required
                                         defaultValue={props.taxi.poids_vide}
                                         placeholder=""></Form.Control>
-                                </Form.Group>
+                                </Form.Group> */}
 
-                                <Form.Group controlId="charge_utile">
+                                {/* <Form.Group controlId="charge_utile">
                                     <Form.Label>Charge utile</Form.Label>
                                     <Form.Control type="text" name="charge_utile" required
                                         defaultValue={props.taxi.charge_utile}
                                         placeholder=""></Form.Control>
-                                </Form.Group>
+                                </Form.Group> */}
 
-                                <Form.Group controlId="carrosserie">
+                                {/* <Form.Group controlId="carrosserie">
                                     <Form.Label>Carrosserie</Form.Label>
                                     <Form.Control type="text" name="carrosserie" required
                                         defaultValue={props.taxi.carrosserie}
                                         placeholder=""></Form.Control>
-                                </Form.Group>
+                                </Form.Group> */}
 
                                 <Form.Group>
                                     <p></p>

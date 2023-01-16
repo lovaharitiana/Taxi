@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { getCarte_grises } from "../services/Carte_griseService";
+// import { getCarte_grises } from "../services/Carte_griseService";
 import { getChauffeurs } from "../services/ChauffeurService";
 
 import { Button, Modal, Row, Col, Form } from "react-bootstrap";
 import { addTaxi } from '../services/TaxiService';
 const AddTaxiModal = (props) => {
-    const [carte_grises, setCarte_grises] = useState([]);
+    // const [carte_grises, setCarte_grises] = useState([]);
     const [chauffeurs, setChauffeurs] = useState([]);
 
     const [isUpdated, setIsUpdated] = useState(false);
     // //    CARTE GRISE
-    useEffect(() => {
-        let mounted = true;
-        getCarte_grises()
-            .then(data => {
-                if (mounted) {
-                    setCarte_grises(data)
-                }
-            })
-        return () => {
-            mounted = false;
-            setIsUpdated(false);
-        }
-    }, [isUpdated, carte_grises]);
+    // useEffect(() => {
+    //     let mounted = true;
+    //     getCarte_grises()
+    //         .then(data => {
+    //             if (mounted) {
+    //                 setCarte_grises(data)
+    //             }
+    //         })
+    //     return () => {
+    //         mounted = false;
+    //         setIsUpdated(false);
+    //     }
+    // }, [isUpdated, carte_grises]);
 
     // CHAUFFEUR
     useEffect(() => {
@@ -51,7 +51,7 @@ const AddTaxiModal = (props) => {
                 props.setUpdated(true);
             },
                 (error) => {
-                    alert("Failed to add Taxi");
+                    alert("Erreur d'ajout de taxi");
                 });
     }
     return (
@@ -85,32 +85,37 @@ const AddTaxiModal = (props) => {
                                     <Form.Control type="text" name="nb_place" required placeholder=""></Form.Control>
                                 </Form.Group>
 
-                                <Form.Group controlId="numMoteur">
+                                <Form.Group controlId="carte_grise">
+                                    <Form.Label>Carte_grise</Form.Label>
+                                    <Form.Control type="text" name="carte_grise" required placeholder=""></Form.Control>
+                                </Form.Group>
+
+                                {/* <Form.Group controlId="numMoteur">
                                     <Form.Label>Numero du moteur</Form.Label>
                                     <Form.Control type="text" name="numMoteur" required placeholder=""></Form.Control>
-                                </Form.Group>
+                                </Form.Group> */}
 
-                                <Form.Group controlId="poids_total">
+                                {/* <Form.Group controlId="poids_total">
                                     <Form.Label>Poids total</Form.Label>
                                     <Form.Control type="text" name="poids_total" required placeholder=""></Form.Control>
-                                </Form.Group>
+                                </Form.Group> */}
 
-                                <Form.Group controlId="poids_vide">
+                                {/* <Form.Group controlId="poids_vide">
                                     <Form.Label>Poids à vide</Form.Label>
                                     <Form.Control type="text" name="poids_vide" required placeholder=""></Form.Control>
-                                </Form.Group>
+                                </Form.Group> */}
 
-                                <Form.Group controlId="charge_utile">
+                                {/* <Form.Group controlId="charge_utile">
                                     <Form.Label>Charge utile</Form.Label>
                                     <Form.Control type="text" name="charge_utile" required placeholder=""></Form.Control>
-                                </Form.Group>
+                                </Form.Group> */}
 
-                                <Form.Group controlId="carrosserie">
+                                {/* <Form.Group controlId="carrosserie">
                                     <Form.Label>Carrosserie</Form.Label>
                                     <Form.Control type="text" name="carrosserie" required placeholder=""></Form.Control>
-                                </Form.Group>
+                                </Form.Group> */}
 
-                                <p></p>
+                                {/* <p></p>
                                 <Form.Label>Numero carte_grise</Form.Label>
                                 <Form.Select aria-label="Default select example" name="numSerie" >
                                     
@@ -120,7 +125,7 @@ const AddTaxiModal = (props) => {
                                     )}
                                 </Form.Select>
 
-                                <p></p>
+                                <p></p> */}
                                 <Form.Label>Numero Chauffeur</Form.Label>
                                 <Form.Select aria-label="Default select example" name="numChf" >
                                     {chauffeurs.map((chf) =>

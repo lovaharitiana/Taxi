@@ -10,7 +10,7 @@ const addUserModal = (props) => {
             props.setUpdated(true);
         },
         (error)=>{
-            alert("Failed to add User");
+            alert("Erreur d'ajout d'utilisateur");
         }); 
     }
     return (

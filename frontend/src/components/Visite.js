@@ -42,7 +42,7 @@ const Visites = () => {
     };
 
     const handleDelete = (e, numVis) => {
-        if (window.confirm('Are you sure?')) {
+        if (window.confirm('Etes-vous sure?')) {
           e.preventDefault();
           deleteVisites(numVis)
             .then((result) => {
@@ -50,7 +50,7 @@ const Visites = () => {
               setIsUpdated(true);
             },
               (error) => {
-                alert("Failed to delete Visite");
+                alert("Erreur de suppression de visite");
               }
             )
         }

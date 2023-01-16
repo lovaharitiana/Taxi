@@ -76,6 +76,15 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'djongo',
+        'NAME': 'uberdatabase',
+        
+    }
+}
+
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
@@ -100,13 +109,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'uberdatabase',
-        
-    }
-}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

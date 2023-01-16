@@ -1,0 +1,16 @@
+.containerMap{
+    width: 100%;
+    padding: 2%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.containerMap .map{
+    width: 48%;
+
+}
+.containerMap .form{
+    width: 48%;
+    
+}

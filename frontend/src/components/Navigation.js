@@ -1,7 +1,7 @@
 import React from "react";
 import {Navbar, Nav} from "react-bootstrap";
 import "../App.css";
-import logo from "../static/logo.png"
+import logo from "../static/logo.png";
 import {
     CDBSidebar,
     CDBSidebarHeader,
@@ -16,7 +16,7 @@ import {NavLink} from 'react-router-dom';
 const Navigation = () => {
     return (
         <div>
-        <Navbar bg="dark" variant="dark" expand="lg">
+        {/* <Navbar bg="dark" variant="dark" expand="lg">
             <Navbar.Brand className="app-logo" href="/">
                 <img
                     alt=""
@@ -28,10 +28,10 @@ const Navigation = () => {
                 
             </Navbar.Brand>
         
-        </Navbar>
+        </Navbar> */}
         
         <div className="sidebar">
-        <CDBSidebar textColor="#333" backgroundColor="#f0f0f0">
+        <CDBSidebar textColor="white" bg="dark" variant="dark" expand="lg">
         <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>Navigation</CDBSidebarHeader>
         <CDBSidebarContent>
           <CDBSidebarMenu>
@@ -39,14 +39,14 @@ const Navigation = () => {
               <CDBSidebarMenuItem icon="home">Home</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/chauffeurs" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="list">Chauffeur List</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="user">Chauffeur List</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/taxis" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="taxi">Taxi List</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/carte_grises" activeClassName="activeClicked">
+            {/* <NavLink exact to="/carte_grises" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="list">Carte grise List</CDBSidebarMenuItem>
-            </NavLink>
+            </NavLink> */}
             <NavLink exact to="/visites" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="list">Visite list</CDBSidebarMenuItem>
             </NavLink>
@@ -56,15 +56,15 @@ const Navigation = () => {
             <NavLink exact to="/agences" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="list">Agence list</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/capacites" activeClassName="activeClicked">
+            {/* <NavLink exact to="/capacites" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="list">Capacite list</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/permis" activeClassName="activeClicked">
+            </NavLink> */}
+            {/* <NavLink exact to="/permis" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="list">Permis list</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/categories" activeClassName="activeClicked">
+            </NavLink> */}
+            {/* <NavLink exact to="/categories" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="list">Categories list</CDBSidebarMenuItem>
-            </NavLink>
+            </NavLink> */}
             <NavLink exact to="/users" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="list">Utilisateur list</CDBSidebarMenuItem>
             </NavLink>
@@ -76,14 +76,7 @@ const Navigation = () => {
           </CDBSidebarMenu>
         </CDBSidebarContent>
 
-        <CDBSidebarFooter style={{ textAlign: 'center' }}>
-          <div
-            className="sidebar-btn-wrapper" 
-            style={{padding: '20px 5px'}}
-          >
-            Sidebar Footer
-          </div>
-        </CDBSidebarFooter>
+       
       </CDBSidebar>
         </div>
         </div>

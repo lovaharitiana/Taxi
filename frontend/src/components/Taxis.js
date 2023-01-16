@@ -48,7 +48,7 @@ const Taxis = () => {
   };
 
   const handleDelete = (e, numImm) => {
-    if (window.confirm('Are you sure?')) {
+    if (window.confirm('Etes-vous sure?')) {
       e.preventDefault();
       deleteTaxis(numImm)
         .then((result) => {
@@ -56,7 +56,7 @@ const Taxis = () => {
           setIsUpdated(true);
         },
           (error) => {
-            alert("Failed to delete Taxi");
+            alert("Erreur de suppression de taxi");
           }
         )
     }
@@ -77,13 +77,15 @@ const Taxis = () => {
             <th>Numero immatriculation</th>
             <th>Marque du véhicule</th>
             <th>Nombre de place</th>
-            <th>Numero moteur</th>
+            <th>Carte grise</th>
+            <th>Chauffeur</th>
+            {/* <th>Numero moteur</th>
             <th>Poids total</th>
             <th>Poids à vide</th>
             <th>Charge utile</th>
             <th>Carrosserie du vehicule</th>
             <th>Numero Carte_Grise</th>
-            <th>Chauffeur</th>
+            <th>Chauffeur</th> */}
             <th>Actions</th>
           </tr>
         </thead>
@@ -93,11 +95,6 @@ const Taxis = () => {
               <td>{txs.numImm}</td>
               <td>{txs.marque}</td>
               <td>{txs.nb_place}</td>
-              <td>{txs.numMoteur}</td>
-              <td>{txs.poids_total}</td>
-              <td>{txs.poids_vide}</td>
-              <td>{txs.charge_utile}</td>
-              <td>{txs.carrosserie}</td>
               <td>{txs.carte_grise}</td>
               <td>{txs.chauffeur}</td>
               <td >

@@ -1,7 +1,45 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Button, Modal, Row, Col, Form } from "react-bootstrap";
 import { updateAssurance } from '../services/AssuranceService';
+import { getTaxis } from "../services/TaxiService";
+import { getAgences } from "../services/AgenceService";
+
 const UpdateAssuranceModal = (props) => {
+    const [taxis, setTaxis] = useState([]);
+    const [agences, setAgences] = useState([]);
+    const [isUpdated, setIsUpdated] = useState(false);
+
+    // TAXI
+    useEffect(() => {
+        let mounted = true;
+        if (taxis.length && !isUpdated) {
+            return;
+        }
+        getTaxis()
+            .then(data => {
+                if (mounted) {
+                    setTaxis(data)
+                }
+            })
+        return () => {
+            mounted = false;
+            setIsUpdated(false);
+        }
+    }, [isUpdated, taxis]);
+    // AGENCES
+    useEffect(() => {
+        let mounted = true;
+        getAgences()
+            .then(data => {
+                if (mounted) {
+                    setAgences(data)
+                }
+            })
+        return () => {
+            mounted = false;
+            setIsUpdated(false);
+        }
+    }, [isUpdated, agences]);
     const handleSubmit = (e) => {
         e.preventDefault();
         updateAssurance(props.assurance.ref, e.target)
@@ -10,7 +48,7 @@ const UpdateAssuranceModal = (props) => {
                 props.setUpdated(true);
             },
                 (error) => {
-                    alert("Failed to update Assurance");
+                    alert("Erreur de modification d'assurance");
                 });
     }
     return (
@@ -44,9 +82,26 @@ const UpdateAssuranceModal = (props) => {
                                         placeholder=""></Form.Control>
                                 </Form.Group>
 
-                               
+                                <p></p>
+                                <Form.Label>Immatriculation</Form.Label>
+                                <Form.Select aria-label="Default select example" name="numImm" >
 
-                                
+                                    {taxis.map((txs) =>
+
+                                        <option value={txs.numImm}>{txs.numImm}</option>
+                                    )}
+                                </Form.Select>
+                                <p></p>
+                                <Form.Label>Agence</Form.Label>
+                                <Form.Select aria-label="Default select example" name="numAg" >
+
+                                    {agences.map((ag) =>
+
+                                        <option value={ag.numAg}>{ag.numAg}</option>
+                                    )}
+                                </Form.Select>
+
+
 
                                 <Form.Group>
                                     <p></p>

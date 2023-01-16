@@ -10,6 +10,7 @@ import L, { icon } from 'leaflet';
 import { LatLng } from 'leaflet';
 import { Popup, Marker } from 'react-leaflet';
 import { type } from '@testing-library/user-event/dist/type';
+import "./mapcont.css"
 
 
 const Home = (props: any) => {
@@ -18,11 +19,11 @@ const Home = (props: any) => {
     const [destinationValue, setDestinationValue] = useState('');
     const [distanceValue, setDistanceValue] = useState(0);
     const [calculMontant, setCalculMontant] = useState(0);
-   console.log(distanceValue, destinationValue, departValue, calculMontant);
-   
-   
+    console.log(distanceValue, destinationValue, departValue, calculMontant);
+
+
     const [show, setShow] = useState(false)
-    
+
     // const [distance, setDistance] = useState(0)
     const [speed, setSpeed] = useState(2);
     const [estimatedTime, setEstimatedTime] = useState(0);
@@ -30,34 +31,34 @@ const Home = (props: any) => {
     const estimatedTimeInMinutes = Math.ceil(estimatedTime * 40);
     const handleSubmit = (e: { preventDefault: () => void; target: any; }) => {
         e.preventDefault();
-// console.log(e.target.value);
+        // console.log(e.target.value);
 
         addCourse(e.target, distanceValue, destinationValue, departValue, calculMontant)
             .then((result) => {
                 alert(result);
                 // props.setUpdated(true);
                 console.log(props)
-            }).catch ((error) => {
+            }).catch((error) => {
                 alert("Failed to add Course");
                 console.log(error)
             });
-                
+
     }
     const handleCalculer = (e: { preventDefault: () => void; target: any; }) => {
         e.preventDefault();
 
-        
-        const depart = document.getElementById('depart') ;
-        const destination = document.getElementById('destination') ;
+
+        const depart = document.getElementById('depart');
+        const destination = document.getElementById('destination');
         const description = document.getElementById('destination');
-   
+
         if (!depart || !destination || !description) {
             // Return from the function if any of the form elements are empty
             return;
         }
 
         setShow(true);
-       
+
         // setDistance(Math.floor(Math.random() * 10) + 1)
     }
     const [selectedPosition, setSelectedPosition] = useState<[number, number]>([0, 0]);
@@ -68,7 +69,7 @@ const Home = (props: any) => {
 
 
 
-        
+
 
         const getPlaceName = async (lat: number, lng: number) => {
             try {
@@ -103,14 +104,14 @@ const Home = (props: any) => {
                     if (firstClick === null) {
                         const departInput = document.getElementById('depart') as HTMLInputElement;
 
-                      
+
                         if (departInput) {
                             departInput.value = placeName;
                             // console.log( departInput.value);
                             // localStorage.setItem("depart", JSON.stringify(departInput.value));
                             setDepartValue(departInput.value);
-                            
-                            
+
+
                         }
                         // Update the firstClick state variable with the clicked position
                         setFirstClick([lat, lng]);
@@ -136,9 +137,9 @@ const Home = (props: any) => {
                         setCalculMontant(Number((Number(distanceInKilometersRounded) * 10000).toFixed(2).toString()));
                         console.log(Number((Number(distanceInKilometersRounded) * 10000).toFixed(2).toString()));
                         localStorage.setItem("montant", JSON.stringify(Number((Number(distanceInKilometersRounded) * 10000).toFixed(2).toString())));
-                        
-                       
-                       
+
+
+
                         const distanceElement = document.getElementById('distance') as HTMLInputElement;
                         if (distanceElement) {
                             distanceElement.value = distanceInKilometersRounded.toString();
@@ -158,7 +159,7 @@ const Home = (props: any) => {
             },
 
         });
-       
+
         return (
             // Render a marker at the position of the first click, if it exists
             firstClick ? (
@@ -187,15 +188,15 @@ const Home = (props: any) => {
     // }, [distance, speed]);
 
 
-    
+
 
 
     return (
-        <div>
+        <div className="containerMap">
 
-            <div className="container">
+            <div className='map'>
 
-                <MapContainer center={[-21.4534, 47.0761]} zoom={14} style={{ width: '850px', height: '600px' }}>
+                <MapContainer center={[-21.4534, 47.0761]} zoom={14} style={{ width: '100%', height: '400px' }}>
                     <TileLayer
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -203,6 +204,9 @@ const Home = (props: any) => {
                     <Markers />
 
                 </MapContainer>
+            </div>
+
+            <div className='form'>
                 <Form onSubmit={handleSubmit}>
 
                     <Form.Group controlId="depart">
@@ -230,28 +234,28 @@ const Home = (props: any) => {
 
                     </Form.Group>
 
-                    
+
 
                     <Form.Group controlId="distance">
-                        <Form.Label>Distance</Form.Label>
-                        <Form.Control value={distanceValue} type="text" name="distance"  placeholder="" ></Form.Control>
+                        {/* <Form.Label>Distance</Form.Label> */}
+                        <Form.Control value={distanceValue} type="hidden" name="distance" placeholder="" ></Form.Control>
                     </Form.Group>
 
 
                     <Form.Group>
                         <p></p>
-                        <Button variant="primary" onClick={handleCalculer}>
+                        <Button variant="primary" onClick={handleCalculer} style={{ width: '30%', height: '40px' }}>
                             Calculez
                         </Button>
                     </Form.Group>
 
-                    {show ? ( <Form.Group controlId="calcul">
+                    {show ? (<Form.Group controlId="calcul">
                         {/* <Form.Group controlId="distance">
 
                             <Form.Control type="hidden" name="distance" required placeholder="" ></Form.Control>
 
                         </Form.Group> */}
-                       
+
 
 
                         <Form.Group controlId="montant">
@@ -268,13 +272,13 @@ const Home = (props: any) => {
                                 Envoyer
                             </Button>
                         </Form.Group>
-                    </Form.Group>): null}
+                    </Form.Group>) : null}
 
 
 
                 </Form>
-
             </div>
+
         </div>
     );
 };

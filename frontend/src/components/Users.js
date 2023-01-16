@@ -33,7 +33,7 @@ const Users = () => {
     };
 
     const handleDelete = (e, id) => {
-        if (window.confirm('Are you sure?')) {
+        if (window.confirm('Etes-vous sure?')) {
             e.preventDefault();
             deleteUsers(id)
                 .then((result) => {
@@ -41,7 +41,7 @@ const Users = () => {
                     setIsUpdated(true);
                 },
                     (error) => {
-                        alert("Failed to delete User");
+                        alert("Erreur de suppression de cet utilisateur");
                     }
                 )
         }

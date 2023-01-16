@@ -46,7 +46,7 @@ const Chauffeurs = () => {
   };
 
   const handleDelete = (e, numChf) => {
-    if (window.confirm('Are you sure?')) {
+    if (window.confirm('Etes-vous sure?')) {
       e.preventDefault();
       deleteChauffeurs(numChf)
         .then((result) => {
@@ -54,7 +54,7 @@ const Chauffeurs = () => {
           setIsUpdated(true);
         },
           (error) => {
-            alert("Failed to delete Chauffeur");
+            alert("Erreur de suppression de chauffeur");
           }
         )
     }
@@ -72,12 +72,9 @@ const Chauffeurs = () => {
             <th>Numero chauffeur</th>
             <th>Nom</th>
             <th>Prénoms</th>
-            <th>Date de naissance</th>
-            <th>Lieu de naissance</th>
             <th>Adresse</th>
-            <th>Profession</th>
-            <th>Numero Permis</th>
-            <th>Numero Capacite</th>
+            <th>Catégories permis</th>
+            <th>Numero capacité</th>
             <th>Actions</th>
 
           </tr>
@@ -88,12 +85,16 @@ const Chauffeurs = () => {
               <td>{chf.numChf}</td>
               <td>{chf.nomChf}</td>
               <td>{chf.prenomChf}</td>
-              <td>{chf.date_naissance}</td>
+              <td>{chf.adresse}</td>
+              <td>{chf.permis}</td>
+              <td>{chf.capacite}</td>
+
+              {/* <td>{chf.date_naissance}</td>
               <td>{chf.lieu_naissance}</td>
               <td>{chf.adresse}</td>
               <td>{chf.profession}</td>
               <td>{chf.permi}</td>
-              <td>{chf.capacite}</td>
+              <td>{chf.capacite}</td> */}
               <td>
                 <Button className="mr-2" variant="warning"
                   onClick={event => handleUpdate(event, chf)}>

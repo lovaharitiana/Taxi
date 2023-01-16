@@ -21,6 +21,7 @@ export function updateVisite(vstid, visite) {
         
         date_vis: visite.date_vis.value,
         fin_vis: visite.fin_vis.value,
+        taxi: visite.numImm.value,
     })
         .then(response => response.data)
 }

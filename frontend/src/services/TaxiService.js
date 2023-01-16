@@ -10,13 +10,15 @@ export function addTaxi(taxi) {
         numImm: taxi.numImm.value,
         marque: taxi.marque.value,
         nb_place: taxi.nb_place.value,
-        numMoteur: taxi.numMoteur.value,
-        poids_total: taxi.poids_total.value,
-        poids_vide: taxi.poids_vide.value,
-        charge_utile: taxi.charge_utile.value,
-        carrosserie: taxi.carrosserie.value,
-        carte_grise: taxi.numSerie.value,
+        carte_grise: taxi.carte_grise.value,
         chauffeur: taxi.numChf.value,
+        // numMoteur: taxi.numMoteur.value,
+        // poids_total: taxi.poids_total.value,
+        // poids_vide: taxi.poids_vide.value,
+        // charge_utile: taxi.charge_utile.value,
+        // carrosserie: taxi.carrosserie.value,
+        // carte_grise: taxi.numSerie.value,
+        // chauffeur: taxi.numChf.value,
     })
         .then(response => response.data)
 }
@@ -26,11 +28,8 @@ export function updateTaxi(txsid, taxi) {
 
         marque: taxi.marque.value,
         nb_place: taxi.nb_place.value,
-        numMoteur: taxi.numMoteur.value,
-        poids_total: taxi.poids_total.value,
-        poids_vide: taxi.poids_vide.value,
-        charge_utile: taxi.charge_utile.value,
-        carrosserie: taxi.carrosserie.value,
+        carte_grise: taxi.carte_grise.value,
+        chauffeur: taxi.numChf.value,
     })
         .then(response => response.data)
 }
