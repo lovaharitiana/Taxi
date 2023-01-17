@@ -14,12 +14,12 @@ const addAgenceModal = (props) => {
         }); 
     }
     return (
-        <div className="container">
+        <div className="container" >
             <Modal
                 {...props}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
-                centered>
+                centered style={{ fontFamily: 'Times New Roman'}}>
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
                         Ajouter Agence

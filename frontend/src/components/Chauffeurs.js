@@ -3,16 +3,29 @@ import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { getChauffeurs, deleteChauffeurs } from "../services/ChauffeurService";
 import "../App.css";
+import "../recherche.css";
 import { FaEdit } from 'react-icons/fa';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import AddChauffeurModal from './AddChauffeurModal';
 import UpdateChauffeurModal from './UpdateChauffeurModal';
-
+import { FaSearch } from "react-icons/fa";
 
 const Chauffeurs = () => {
   const [chauffeurs, setChauffeurs] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(`Recherche lancée pour : ${searchTerm}`);
+  };
+
+  const filteredChauffeurs = chauffeurs.filter(chf =>
+    chf.nomChf.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    chf.prenomChf.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    chf.permis.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    chf.capacite.toString().includes(searchTerm));
+
   const [addModalShow, setAddModalShow] = useState(false);
   const [editModalShow, setEditModalShow] = useState(false);
   const [editChauffeur, setEditChauffeur] = useState([]);
@@ -64,8 +77,24 @@ const Chauffeurs = () => {
   let AddModalClose = () => setAddModalShow(false);
   let EditModalClose = () => setEditModalShow(false);
   return (
-    <div className="row side-row">
-      <Table striped bordered hover>
+    <div className="row side-row" style={{ fontFamily: 'Times New Roman'}}>
+      <div className="search-form-container">
+      <form onSubmit={handleSubmit}>
+        <div className="search-form">
+          <input
+            type="text"
+            placeholder="Rechercher..."
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
+          />
+          <button type="submit">
+            <FaSearch />
+          </button>
+        </div>
+      </form>
+      </div>
+      
+      <Table striped bordered hover className="table-container" >
         <thead>
           <tr>
 
@@ -80,7 +109,7 @@ const Chauffeurs = () => {
           </tr>
         </thead>
         <tbody>
-          {chauffeurs.map((chf) =>
+          {filteredChauffeurs.map((chf) =>
             <tr key={chf.id}>
               <td>{chf.numChf}</td>
               <td>{chf.nomChf}</td>
@@ -105,11 +134,11 @@ const Chauffeurs = () => {
                   onClick={event => handleDelete(event, chf.numChf)}>
                   <RiDeleteBin5Line />
                 </Button>
-                
+
                 <UpdateChauffeurModal show={editModalShow} onHide={EditModalClose}
                   chauffeur={editChauffeur} setUpdated={setIsUpdated}>
                 </UpdateChauffeurModal>
-                
+
               </td>
             </tr>)}
 

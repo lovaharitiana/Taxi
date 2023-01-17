@@ -30,7 +30,7 @@ const Navigation = () => {
         
         </Navbar> */}
         
-        <div className="sidebar">
+        <div className="sidebar" style={{ fontFamily: 'Times New Roman'}}>
         <CDBSidebar textColor="white" bg="dark" variant="dark" expand="lg">
         <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>Navigation</CDBSidebarHeader>
         <CDBSidebarContent>

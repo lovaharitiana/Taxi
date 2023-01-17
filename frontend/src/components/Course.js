@@ -40,7 +40,7 @@ const Course = () => {
 
 
     return (
-        <div className="row side-row">
+        <div className="row side-row" style={{ fontFamily: 'Times New Roman'}}>
             <Table striped bordered hover>
                 <thead>
                     <tr>

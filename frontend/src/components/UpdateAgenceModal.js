@@ -19,7 +19,7 @@ const UpdateAgenceModal = (props) => {
                 {...props}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
-                centered>
+                centered style={{ fontFamily: 'Times New Roman'}}>
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
                         Modifier Agences

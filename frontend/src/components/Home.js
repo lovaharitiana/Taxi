@@ -149,7 +149,7 @@ function Home() {
   }, []);
 
   return (
-    <div className="App">
+    <div className="App" style={{ fontFamily: 'Times New Roman'}}>
       <div className="container">
         <div className="card">
           <BarChart width={500} height={300} data={data}>

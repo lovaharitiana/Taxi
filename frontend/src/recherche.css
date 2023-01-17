@@ -1,0 +1,35 @@
+.table-container {
+   margin-top: 20px;
+}
+
+.search-form-container {
+    width: 100%;
+}
+
+.search-form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-form input {
+    margin-left: 70%;
+    width: 25%;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+
+.search-form button {
+    width: 5%;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid gray;
+    
+    color: rgb(15, 14, 14);
+}
+
+table {
+    width: 100%;
+    }
