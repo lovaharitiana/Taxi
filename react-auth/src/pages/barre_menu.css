@@ -95,7 +95,7 @@
     padding: .6rem 6rem;
 }
 .home::before{
-    content: '';
+    content: '<div>';
     display: block;
     background-color: #011f29;
     
