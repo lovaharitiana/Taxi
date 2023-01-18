@@ -3,23 +3,23 @@ import { Link } from "react-router-dom"
 import './barre_menu.css'
 import imgHome from  "./../assets/car-g7d48b4cf1_1920.jpg"
 import imgCard from  "./../assets/taxi-g9be7e529d_640.jpg"
-const BarreMenu = ()=>{
-    return (
-        <div className="barre-menu">
-            <ul>
-                <li>
-                <Link to='/login' className='nav-link' id='btnLogout' >accueil</Link>
-                </li>
-                <li>
-                <Link to='/login' className='nav-link' id='btnLogout' >services</Link>
-                </li>
-                <li>
-                    <Link to='/login' className='nav-link' id='btnLogout' >se deconnecter</Link>
-                </li>
-            </ul>
-        </div>
-    )
-}
+// const BarreMenu = ()=>{
+//     return (
+//         <div className="barre-menu">
+//             <ul>
+//                 <li>
+//                 <Link to='/login' className='nav-link' id='btnLogout' >accueil</Link>
+//                 </li>
+//                 <li>
+//                 <Link to='/login' className='nav-link' id='btnLogout' >services</Link>
+//                 </li>
+//                 <li>
+//                     <Link to='/login' className='nav-link' id='btnLogout' >se deconnecter</Link>
+//                 </li>
+//             </ul>
+//         </div>
+//     )
+// }
 
 const Card = (props:any) => {
     return (
@@ -50,7 +50,7 @@ const Footer = ()=>{
     return (
         <>
             <div className="home" style={backgroundColor} >
-                <BarreMenu/>
+                {/* <BarreMenu/> */}
                 <div className="text-home">
                     <h1 className="message-bievenue">commandez vos <span>taxi.</span></h1>
                     <button>se connecter</button>

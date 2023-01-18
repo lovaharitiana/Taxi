@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 const Nav = (props: { name: string } ) => {
     
     const logout = async () => {
@@ -47,9 +48,10 @@ const Nav = (props: { name: string } ) => {
         )
     }
     return (
-        <nav className='navbar navbar-expand-md navbar-dark bg-dark mb-4'>
+        <nav className='navbar navbar-expand-md navbar-dark bg-dark'>
             <div className='container-fluid'>
-                <Link to='/connection' className='navbar-brand'>Home</Link>
+                {/* <Link to='/connection' className='navbar-brand'>Home</Link> */}
+                <Link to='/' className='navbar-brand'>Accueil</Link>
                 <div>
                     {menu}
                 </div>

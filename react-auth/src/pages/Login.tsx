@@ -40,7 +40,7 @@ const Login = ( ) => {
         window.setTimeout(function(){
             window.location.reload()
         }, 100)
-        return <Navigate to='/' />; 
+        return <Navigate to='/reservation' />; 
     } 
     
     
