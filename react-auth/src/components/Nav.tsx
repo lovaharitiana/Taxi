@@ -11,9 +11,6 @@ const Nav = (props: { name: string } ) => {
             
         });
         localStorage.removeItem("email");
-        
-       
-
     }
 
     let menu;
@@ -52,10 +49,9 @@ const Nav = (props: { name: string } ) => {
     return (
         <nav className='navbar navbar-expand-md navbar-dark bg-dark mb-4'>
             <div className='container-fluid'>
-                <Link to='/' className='navbar-brand'>Home</Link>
+                <Link to='/connection' className='navbar-brand'>Home</Link>
                 <div>
                     {menu}
-                
                 </div>
             </div>
         </nav>
