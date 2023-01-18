@@ -50,7 +50,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def delete(self, request, pk=None):
         user_to_delete = User.objects.get(id=pk)
         user_to_delete.delete()
-        return JsonResponse("Utilisateur deleted successfully", safe=False)
+        return JsonResponse("Utilisateur supprimé avec succes", safe=False)
 
    
 
@@ -61,8 +61,8 @@ class RegisterView(APIView):
 
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse("Utilisateur created successfully", safe=False)
-        return JsonResponse("Failed to add utilisateur", safe=False)
+            return JsonResponse("Utilisateur ajouté avec succes", safe=False)
+        return JsonResponse("Erreur d'ajout de l'utilisateur", safe=False)
 
 
         
@@ -132,8 +132,8 @@ class CourseViewSet(viewsets.ModelViewSet):
 
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse("Course Updated Successfully", safe=False)
-        return JsonResponse("Failed to Update Course")
+            return JsonResponse("Course", safe=False)
+        return JsonResponse("Erreur de modification de la course")
 
 class CourseView(APIView):
     def post(self, request):
@@ -145,7 +145,7 @@ class CourseView(APIView):
         if serializer.is_valid():
             serializer.save()
             return JsonResponse("votre demande est bien envoyée", safe=False)
-        return JsonResponse("Failed to add course", safe=False)
+        return JsonResponse("Erreur d'envoi de votre demande", safe=False)
 
    
 

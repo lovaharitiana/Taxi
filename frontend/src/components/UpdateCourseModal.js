@@ -4,11 +4,14 @@ import { updateCourse } from '../services/CourseService';
 import { getTaxis } from "../services/TaxiService";
 
 const UpdateCourseModal = (props) => {
+    const [alert, setAlert] = useState("");
+    const [showAlert, setShowAlert] = useState(false);
+
     const [taxis, setTaxis] = useState([]);
     const [isUpdated, setIsUpdated] = useState(false);
-    
-     // TAXI
-     useEffect(() => {
+
+    // TAXI
+    useEffect(() => {
         let mounted = true;
         getTaxis()
             .then(data => {
@@ -23,15 +26,41 @@ const UpdateCourseModal = (props) => {
     }, [isUpdated, taxis]);
 
     const handleSubmit = (e) => {
+        // e.preventDefault();
+        // updateCourse(props.course.id, e.target)
+        // .then((result)=>{
+        //     alert(result);
+        //     props.setUpdated(true);
+        // },
+        // (error)=>{
+        //     alert("Failed to update Course");
+        // }); 
+
+        // e.preventDefault();
+        // updateCourse(props.course.id, e.target)
+        // .then((result)=>{
+        //     setAlert("Course modifiée avec succes!");
+        //     props.setUpdated(true);
+        // },
+        // (error)=>{
+        //     setAlert("Erreur de modification de la course");
+        // }); 
+
         e.preventDefault();
         updateCourse(props.course.id, e.target)
-        .then((result)=>{
-            alert(result);
-            props.setUpdated(true);
-        },
-        (error)=>{
-            alert("Failed to update Course");
-        }); 
+            .then((result) => {
+                setAlert("Course modifiée avec succes!");
+                setShowAlert(true);
+                props.setUpdated(true);
+            },
+                (error) => {
+                    setAlert("Erreur de modification de la course");
+                    setShowAlert(true);
+                });
+    }
+
+    const closeAlert = () => {
+        setShowAlert(false);
     }
     return (
         <div className="container">
@@ -39,7 +68,7 @@ const UpdateCourseModal = (props) => {
                 {...props}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
-                centered style={{ fontFamily: 'Times New Roman'}}>
+                centered style={{ fontFamily: 'Times New Roman' }}>
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
                         Modifier Course
@@ -52,36 +81,36 @@ const UpdateCourseModal = (props) => {
                                 <Form.Group controlId="depart">
                                     {/* <Form.Label>Depart</Form.Label> */}
                                     <Form.Control type="hidden" name="depart" required
-                                    defaultValue={props.course.depart}
-                                    placeholder=""></Form.Control>
+                                        defaultValue={props.course.depart}
+                                        placeholder=""></Form.Control>
                                 </Form.Group>
 
                                 <Form.Group controlId="destination">
                                     {/* <Form.Label>Prénoms</Form.Label> */}
-                                    <Form.Control type="hidden" name="destination" required 
-                                    defaultValue={props.course.destination}
-                                    placeholder=""></Form.Control>
+                                    <Form.Control type="hidden" name="destination" required
+                                        defaultValue={props.course.destination}
+                                        placeholder=""></Form.Control>
                                 </Form.Group>
 
                                 <Form.Group controlId="user">
                                     {/* <Form.Label>Date de naissance</Form.Label> */}
-                                    <Form.Control type="hidden" name="user" required 
-                                    defaultValue={props.course.user}
-                                    placeholder=""></Form.Control>
+                                    <Form.Control type="hidden" name="user" required
+                                        defaultValue={props.course.user}
+                                        placeholder=""></Form.Control>
                                 </Form.Group>
 
                                 <Form.Group controlId="montant">
                                     {/* <Form.Label>Montant</Form.Label> */}
-                                    <Form.Control type="hidden" name="montant" required 
-                                    defaultValue={props.course.montant}
-                                    placeholder=""></Form.Control>
+                                    <Form.Control type="hidden" name="montant" required
+                                        defaultValue={props.course.montant}
+                                        placeholder=""></Form.Control>
                                 </Form.Group>
 
                                 <Form.Group controlId="date">
                                     {/* <Form.Label>Date</Form.Label> */}
-                                    <Form.Control type="hidden" name="date" required 
-                                    defaultValue={props.course.date}
-                                    placeholder=""></Form.Control>
+                                    <Form.Control type="hidden" name="date" required
+                                        defaultValue={props.course.date}
+                                        placeholder=""></Form.Control>
                                 </Form.Group>
 
                                 <Form.Label>Immatriculation</Form.Label>
@@ -91,10 +120,19 @@ const UpdateCourseModal = (props) => {
                                         <option value={txs.numImm}>{txs.numImm}</option>
                                     )}
                                 </Form.Select>
-                                
+
 
                                 <Form.Group>
                                     <p></p>
+                                    {/* {alert && <div className="alert alert-success">{alert}</div>} */}
+                                    {/* {alert && window.alert(alert)} */}
+                                    {showAlert && (
+                                        <div className="alert alert-success">
+                                            {alert}
+                                            <button onClick={closeAlert}>X</button>
+                                        </div>
+                                    )}
+
                                     <Button variant="primary" type="submit">
                                         Modifier
                                     </Button>
@@ -105,9 +143,9 @@ const UpdateCourseModal = (props) => {
                     </Row>
                 </Modal.Body>
                 <Modal.Footer>
-                <Button variant="danger" type="submit" onClick={props.onHide}>
-                    Close
-                </Button>
+                    <Button variant="danger" type="submit" onClick={props.onHide}>
+                        Close
+                    </Button>
                 </Modal.Footer>
             </Modal>
 

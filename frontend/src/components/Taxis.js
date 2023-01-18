@@ -8,12 +8,21 @@ import AddTaxiModal from './AddTaxiModal';
 import UpdateTaxiModal from './UpdateTaxiModal';
 import { FaEdit } from 'react-icons/fa';
 import { RiDeleteBin5Line } from 'react-icons/ri';
-
-
+import { FaSearch } from "react-icons/fa";
+import "../recherche.css";
 
 
 const Taxis = () => {
   const [taxis, setTaxis] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(`Recherche lancée pour : ${searchTerm}`);
+  };
+
+  const filteredTaxis = taxis.filter(txs =>
+    txs.numImm.toLowerCase().includes(searchTerm.toLowerCase()));
+  
   const [addModalShow, setAddModalShow] = useState(false);
   const [editModalShow, setEditModalShow] = useState(false);
   const [editTaxi, setEditTaxi] = useState([]);
@@ -69,8 +78,24 @@ const Taxis = () => {
 
 
   return (
+    
     <div className="row side-row" style={{ fontFamily: 'Times New Roman'}}>
-      <Table striped bordered hover>
+      <div className="search-form-container">
+      <form onSubmit={handleSubmit}>
+        <div className="search-form">
+          <input
+            type="text"
+            placeholder="Rechercher..."
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
+          />
+          <button type="submit">
+            <FaSearch />
+          </button>
+        </div>
+      </form>
+      </div>
+      <Table striped bordered hover className="table-container">
         <thead>
           <tr>
 
@@ -90,7 +115,7 @@ const Taxis = () => {
           </tr>
         </thead>
         <tbody>
-          {taxis.map((txs) =>
+          {filteredTaxis.map((txs) =>
             <tr key={txs.id}>
               <td>{txs.numImm}</td>
               <td>{txs.marque}</td>

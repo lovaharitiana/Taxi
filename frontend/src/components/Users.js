@@ -6,11 +6,23 @@ import { Button, ButtonToolbar } from 'react-bootstrap';
 import { FaEdit } from 'react-icons/fa';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import AddUserModal from './AddUserModal';
-
+import { FaSearch } from "react-icons/fa";
+import "../recherche.css";
 
 
 const Users = () => {
     const [users, setUsers] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(`Recherche lancée pour : ${searchTerm}`);
+    };
+
+    const filteredUsers = users.filter(usr =>
+        usr.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        usr.email.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+
     const [addModalShow, setAddModalShow] = useState(false);
     const [isUpdated, setIsUpdated] = useState(false);
     useEffect(() => {
@@ -54,10 +66,24 @@ const Users = () => {
 
     return (
         <div className="row side-row" style={{ fontFamily: 'Times New Roman'}}>
-            <Table striped bordered hover>
+             <div className="search-form-container">
+                <form onSubmit={handleSubmit}>
+                    <div className="search-form">
+                        <input
+                            type="text"
+                            placeholder="Rechercher..."
+                            value={searchTerm}
+                            onChange={(event) => setSearchTerm(event.target.value)}
+                        />
+                        <button type="submit">
+                            <FaSearch />
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <Table striped bordered hover className="table-container">
                 <thead>
                     <tr>
-
                         <th>Numero Utilisateur</th>
                         <th>Nom</th>
                         <th>Email</th>
@@ -65,7 +91,7 @@ const Users = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((usr) =>
+                    {filteredUsers.map((usr) =>
                         <tr key={usr.id}>
                             <td>{usr.id}</td>
                             <td>{usr.name}</td>

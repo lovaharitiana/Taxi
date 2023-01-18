@@ -7,10 +7,23 @@ import { FaEdit } from 'react-icons/fa';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import AddAssuranceModal from './AddAssuranceModal';
 import UpdateAssuranceModal from './UpdateAssuranceModal';
+import { FaSearch } from "react-icons/fa";
+import "../recherche.css";
 
 
 const Assurances = () => {
     const [assurances, setAssurances] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(`Recherche lancée pour : ${searchTerm}`);
+    };
+
+    const filteredAssurances = assurances.filter(ass =>
+        ass.ref.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
+        ass.taxi.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+
     const [addModalShow, setAddModalShow] = useState(false);
     const [editModalShow, setEditModalShow] = useState(false);
     const [editAssurance, setEditAssurance] = useState([]);
@@ -62,7 +75,22 @@ const Assurances = () => {
 
     return (
         <div className="row side-row" style={{ fontFamily: 'Times New Roman'}}>
-            <Table striped bordered hover >
+             <div className="search-form-container">
+                <form onSubmit={handleSubmit}>
+                    <div className="search-form">
+                        <input
+                            type="text"
+                            placeholder="Rechercher..."
+                            value={searchTerm}
+                            onChange={(event) => setSearchTerm(event.target.value)}
+                        />
+                        <button type="submit">
+                            <FaSearch />
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <Table striped bordered hover className="table-container">
                 <thead>
                     <tr>
 
@@ -75,7 +103,7 @@ const Assurances = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {assurances.map((ass) =>
+                    {filteredAssurances.map((ass) =>
                         <tr key={ass.id}>
                             <td>{ass.ref}</td>
                             <td>{ass.debut_ass}</td>
