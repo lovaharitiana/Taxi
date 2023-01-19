@@ -14,12 +14,14 @@ import "./mapcont.css"
 
 
 const Home = (props: any) => {
+    const [showEstimatedTime, setShowEstimatedTime] = useState(false);
+    const [description, setDescription] = useState('');
     const [firstClick, setFirstClick] = useState<[number, number] | null>(null);
     const [departValue, setDepartValue] = useState('');
     const [destinationValue, setDestinationValue] = useState('');
     const [distanceValue, setDistanceValue] = useState(0);
     const [calculMontant, setCalculMontant] = useState(0);
-    console.log(distanceValue, destinationValue, departValue, calculMontant);
+    console.log(distanceValue, destinationValue, departValue, calculMontant, description);
 
 
     const [show, setShow] = useState(false)
@@ -38,6 +40,13 @@ const Home = (props: any) => {
                 alert(result);
                 // props.setUpdated(true);
                 console.log(props)
+                setDepartValue('');
+                setDestinationValue('');
+                setDistanceValue(0);
+                setCalculMontant(0);
+                setDescription('');
+                setShowEstimatedTime(false);
+
             }).catch((error) => {
                 alert("Failed to add Course");
                 console.log(error)
@@ -58,7 +67,7 @@ const Home = (props: any) => {
         }
 
         setShow(true);
-
+        setShowEstimatedTime(true);
         // setDistance(Math.floor(Math.random() * 10) + 1)
     }
     const [selectedPosition, setSelectedPosition] = useState<[number, number]>([0, 0]);
@@ -196,7 +205,7 @@ const Home = (props: any) => {
 
             <div className='map'>
 
-                <MapContainer center={[-21.4534, 47.0761]} zoom={14} style={{ width: '100%', height: '400px' }}>
+                <MapContainer center={[-21.4534, 47.0761]} zoom={14} style={{ width: '100%', height: '700px' }}>
                     <TileLayer
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -206,51 +215,62 @@ const Home = (props: any) => {
                 </MapContainer>
             </div>
 
-            <div className='form'>
-                <Form onSubmit={handleSubmit}>
+            <div className='form' style={{ fontFamily: 'poppins' }}>
+                <div className='formulaire'>
+                    <Form onSubmit={handleSubmit}>
+                        <div className='container'>
+                            <div className='premier_formulaire'>
+                                <Form.Group controlId="depart" >
+                                    <Form.Label className='depart_ecriture'><strong>Depart</strong></Form.Label>
+                                    <Form.Control value={departValue} type="text" name="depart" placeholder="" className='depart'></Form.Control>
+                                </Form.Group>
 
-                    <Form.Group controlId="depart">
-                        <Form.Label>Depart</Form.Label>
-                        <Form.Control value={departValue} type="text" name="depart" placeholder="" ></Form.Control>
-                    </Form.Group>
 
 
 
 
+                                <Form.Group controlId="destination">
+                                    <Form.Label><strong>Destination</strong></Form.Label>
+                                    <Form.Control value={destinationValue} type="text" name="destination" placeholder=""></Form.Control>
+                                </Form.Group>
 
-                    <Form.Group controlId="destination">
-                        <Form.Label>Destination</Form.Label>
-                        <Form.Control value={destinationValue} type="text" name="destination" placeholder=""></Form.Control>
-                    </Form.Group>
-
-                    <Form.Group controlId="description">
+                            </div>
+                            {/* <Form.Group controlId="description">
                         <Form.Label>Description</Form.Label>
                         <Form.Control type="text" as="textarea" rows={parseInt('5', 10)} name="description" required placeholder="Indication pour notre chauffeur "></Form.Control>
-                    </Form.Group>
+                    </Form.Group> */}
+                            <div className='deuxieme_formulaire'>
+                                <Form.Group controlId="description">
+                                    <Form.Label><strong>Description</strong></Form.Label>
+                                    <Form.Control type="text" as="textarea" rows={parseInt('5', 10)} name="description" value={description} onChange={e => setDescription(e.target.value)} required placeholder="Indication pour notre chauffeur "></Form.Control>
+                                </Form.Group>
+                            </div>
+                        </div>
+                        <Form.Group controlId="dateCrs">
 
-                    <Form.Group controlId="dateCrs">
+                            <Form.Control type="hidden" name="dateCrs" required placeholder="" value={currentDate.toISOString().substr(0, 10)}></Form.Control>
 
-                        <Form.Control type="hidden" name="dateCrs" required placeholder="" value={currentDate.toISOString().substr(0, 10)}></Form.Control>
-
-                    </Form.Group>
+                        </Form.Group>
 
 
 
-                    <Form.Group controlId="distance">
-                        {/* <Form.Label>Distance</Form.Label> */}
-                        <Form.Control value={distanceValue} type="hidden" name="distance" placeholder="" ></Form.Control>
-                    </Form.Group>
+                        <Form.Group controlId="distance">
+                            {/* <Form.Label>Distance</Form.Label> */}
+                            <Form.Control value={distanceValue} type="hidden" name="distance" placeholder="" ></Form.Control>
+                        </Form.Group>
 
 
-                    <Form.Group>
-                        <p></p>
-                        <Button variant="primary" onClick={handleCalculer} style={{ width: '30%', height: '40px' }}>
-                            Calculez
-                        </Button>
-                    </Form.Group>
+                        <Form.Group >
+                            <p></p>
+                            <Button variant="primary" onClick={handleCalculer} className='btn_calculer'>
+                                Calculez
+                            </Button>
+                        </Form.Group>
 
-                    {show ? (<Form.Group controlId="calcul">
-                        {/* <Form.Group controlId="distance">
+
+                        <div className='troisième_formulaire'>
+                            {show ? (<Form.Group controlId="calcul" className='formulaire_calcul' >
+                                {/* <Form.Group controlId="distance">
 
                             <Form.Control type="hidden" name="distance" required placeholder="" ></Form.Control>
 
@@ -258,25 +278,60 @@ const Home = (props: any) => {
 
 
 
-                        <Form.Group controlId="montant">
-                            <Form.Label>Tarif(Ariary)</Form.Label>
-                            <Form.Control type="number" name="montant" required placeholder="" value={calculMontant}></Form.Control>
-                            <div>
+                                {/* <Form.Group controlId="montant">
+                                <Form.Label>Tarif(Ariary)</Form.Label>
+                                <Form.Control type="number" name="montant" required placeholder="" value={calculMontant}></Form.Control> */}
+                                {/* <div>
                                 <h2>Arrivé du taxi dans: {estimatedTimeInMinutes} minutes</h2>
-                            </div>
-                        </Form.Group>
+                            </div> */}
 
-                        <Form.Group>
-                            <p></p>
-                            <Button variant="primary" type="submit">
-                                Envoyer
-                            </Button>
-                        </Form.Group>
-                    </Form.Group>) : null}
+                                {/* {showEstimatedTime ? (
+                                    <div>
+                                        <h2>Arrivé du taxi dans: {estimatedTimeInMinutes} minutes</h2>
+                                    </div>
+                                ) : null}
+                            </Form.Group> */}
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Tarif (Ariary)</th>
+                                            <th className='estimation'>Estimation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <Form.Control
+                                                    type="number"
+                                                    name="montant"
+                                                    required
+                                                    placeholder=""
+                                                    value={calculMontant}
+                                                    className='montant'
+                                                />
+                                            </td>
+                                            <td>
+                                                {showEstimatedTime ? (
+                                                    <p className='arrive_taxi'>Arrivé du taxi dans: {estimatedTimeInMinutes} minutes</p>
+                                                ) : null}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
 
 
+                                <Form.Group >
+                                    <p></p>
+                                    <Button variant="primary" type="submit" className='btn_envoyer'>
+                                        Envoyer
+                                    </Button>
+                                </Form.Group>
+                            </Form.Group>) : null}
 
-                </Form>
+                        </div>
+
+                    </Form>
+                </div>
             </div>
 
         </div>

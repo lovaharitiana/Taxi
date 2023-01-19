@@ -1,10 +1,13 @@
+
 .containerMap{
     width: 100%;
+   
     padding: 2%;
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
     align-items: flex-start;
+    background-color: #f0f3f7;
 }
 .containerMap .map{
     width: 48%;
@@ -13,4 +16,76 @@
 .containerMap .form{
     width: 48%;
     
+}
+
+.formulaire{
+    /* border: 4px double black; */
+    padding: 4px;
+    border-radius: 10px;
+}
+
+.formulaire_calcul{
+    background-color: #f0f3f7;
+}
+
+.premier_formulaire{
+    /* border: 1px solid black; */
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;;
+    border-radius: 10px;
+    background-color: white;
+    padding: 27px 15px;
+}
+
+.deuxieme_formulaire{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;;
+    border-radius: 10px;
+    background-color: white;
+    padding: 27px 15px;
+    margin-top: 5%;
+}
+
+
+.troisième_formulaire{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;;
+    border-radius: 10px;
+    background-color: white;
+    padding: 27px 15px;
+    margin-top: 5%;
+}
+
+.btn_calculer{
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    border-radius: 0.3rem;
+    width: 90%;
+    margin-left: 25px;
+    background-color: #17a2b8;
+    border-radius: 4px double #020913;
+    /* margin-right: 25px; */
+    
+}
+
+.btn_envoyer{
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    border-radius: 0.3rem;
+    width: 90%;
+    margin-left: 25px;
+    /* background-color: #17a2b8; */
+    border-radius: 4px double #020913;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.montant{
+    width: 70%;
+}
+
+
+.estimation{
+    padding-left: 20%;
+}
+
+.arrive_taxi{
+    padding-left: 20%;
 }
