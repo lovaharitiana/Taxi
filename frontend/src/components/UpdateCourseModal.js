@@ -4,8 +4,8 @@ import { updateCourse } from '../services/CourseService';
 import { getTaxis } from "../services/TaxiService";
 
 const UpdateCourseModal = (props) => {
-    const [alert, setAlert] = useState("");
-    const [showAlert, setShowAlert] = useState(false);
+    // const [alert, setAlert] = useState("");
+    // const [showAlert, setShowAlert] = useState(false);
 
     const [taxis, setTaxis] = useState([]);
     const [isUpdated, setIsUpdated] = useState(false);
@@ -26,42 +26,22 @@ const UpdateCourseModal = (props) => {
     }, [isUpdated, taxis]);
 
     const handleSubmit = (e) => {
-        // e.preventDefault();
-        // updateCourse(props.course.id, e.target)
-        // .then((result)=>{
-        //     alert(result);
-        //     props.setUpdated(true);
-        // },
-        // (error)=>{
-        //     alert("Failed to update Course");
-        // }); 
-
-        // e.preventDefault();
-        // updateCourse(props.course.id, e.target)
-        // .then((result)=>{
-        //     setAlert("Course modifiée avec succes!");
-        //     props.setUpdated(true);
-        // },
-        // (error)=>{
-        //     setAlert("Erreur de modification de la course");
-        // }); 
-
         e.preventDefault();
         updateCourse(props.course.id, e.target)
             .then((result) => {
-                setAlert("Course modifiée avec succes!");
-                setShowAlert(true);
+                // setAlert("Course modifiée avec succes!");
+                // setShowAlert(true);
+                alert(result.data.message);
                 props.setUpdated(true);
-            },
-                (error) => {
-                    setAlert("Erreur de modification de la course");
-                    setShowAlert(true);
+            }).catch((error) => {
+                    alert("Course ajoutée avec succes");
+                    console.log(error)
                 });
     }
 
-    const closeAlert = () => {
-        setShowAlert(false);
-    }
+    // const closeAlert = () => {
+    //     setShowAlert(false);
+    // }
     return (
         <div className="container">
             <Modal
@@ -126,12 +106,12 @@ const UpdateCourseModal = (props) => {
                                     <p></p>
                                     {/* {alert && <div className="alert alert-success">{alert}</div>} */}
                                     {/* {alert && window.alert(alert)} */}
-                                    {showAlert && (
+                                    {/* {showAlert && (
                                         <div className="alert alert-success">
                                             {alert}
                                             <button onClick={closeAlert}>X</button>
                                         </div>
-                                    )}
+                                    )} */}
 
                                     <Button variant="primary" type="submit">
                                         Modifier

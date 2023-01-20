@@ -33,12 +33,11 @@ const Home = (props: any) => {
     const estimatedTimeInMinutes = Math.ceil(estimatedTime * 40);
     const handleSubmit = (e: { preventDefault: () => void; target: any; }) => {
         e.preventDefault();
-        // console.log(e.target.value);
+        
 
         addCourse(e.target, distanceValue, destinationValue, departValue, calculMontant)
             .then((result) => {
-                alert(result);
-                // props.setUpdated(true);
+                alert(result.data);
                 console.log(props)
                 setDepartValue('');
                 setDestinationValue('');
