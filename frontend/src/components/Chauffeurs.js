@@ -146,7 +146,7 @@ const Chauffeurs = () => {
         </tbody>
       </Table>
       <ButtonToolbar>
-        <Button variant="success" onClick={handleAdd}>Add</Button>{' '}
+        <Button variant="success" onClick={handleAdd}>Ajouter</Button>{' '}
         <AddChauffeurModal show={addModalShow} onHide={AddModalClose} setUpdated={setIsUpdated}>
         </AddChauffeurModal>
       </ButtonToolbar>

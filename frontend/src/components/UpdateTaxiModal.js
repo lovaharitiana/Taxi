@@ -133,7 +133,7 @@ const UpdateTaxiModal = (props) => {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="danger" type="submit" onClick={props.onHide}>
-                        Close
+                        Annuler
                     </Button>
                 </Modal.Footer>
             </Modal>

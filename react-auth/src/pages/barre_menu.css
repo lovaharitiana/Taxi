@@ -34,7 +34,7 @@
 
 .nos-service{
     min-height: 70vh;
-    background-color: transparent;
+    background-color: #f0f3f7;
     padding: 4rem 0;
 }
 .nos-service h1{
@@ -48,9 +48,13 @@
     color :#eeeeee;
     min-height: 20vh;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
+    gap: 1rem;
+   
     padding: 3rem 0;
 }
+
+
 
 .card-home{
     width: 300px;
@@ -64,11 +68,11 @@
     flex-direction: column;
     /* margin-top: 50px; */
 }
-.card-body-home{
+/* .card-body-home{
     padding: 1rem;
     text-align: center;
-}
-.card-body-home button{
+} */
+/* .card-body-home button{
     background-color: transparent;
     border: 1px solid #fea501;
     padding: .3em 3em;
@@ -77,7 +81,65 @@
     outline: none;
     margin: 1rem 0;
 
+} */
+
+.card-body-home-1{
+   
+    text-align: center;
+    margin-top: 10px;
 }
+
+.card-body-home-2{
+    /* border: 2px solid rebeccapurple; */
+    text-align: center;
+    margin-top: 10px;
+}
+
+.card-body-home-3{
+    /* border: 2px solid rebeccapurple; */
+    text-align: center;
+    margin-top: 15px;
+}
+
+.card-body-home-4{
+    /* border: 2px solid rebeccapurple; */
+    text-align: center;
+    margin-top: 25px;
+}
+
+.btn_1{
+    background-color: transparent;
+    border: 1px solid #fea501;
+    border-radius: 3px;
+    color: #fea501;
+    width: 70px;
+}
+
+.btn_2{
+    background-color: transparent;
+    border: 1px solid #fea501;
+    border-radius: 3px;
+    color: #fea501;
+    width: 70px;
+}
+
+.btn_3{
+    background-color: transparent;
+    border: 1px solid #fea501;
+    border-radius: 3px;
+    color: #fea501;
+    width: 70px;
+    margin-top: 15px;
+}
+.btn_4{
+    background-color: transparent;
+    border: 1px solid #fea501;
+    border-radius: 3px;
+    color: #fea501;
+    width: 70px;
+    margin-top: 35px;
+}
+
 .card-homme-container{
     display: flex;
     justify-content: center;
@@ -103,7 +165,7 @@
 } */
 
 .text-home{
-    /* margin-top: 12rem; */
+    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -126,7 +188,63 @@
 }
 /* ... etc ... */
 
+.card-img-top-home-2{
+    height: 169px;
+}
+
+.card-img-top-home-3{
+    height: 170px;
+}
+.card-img-top-home-4{
+    height: 160px;
+}
+
 @keyframes appear {
     from { width: 0; }
     to { width: 100%; }
+}
+
+/* .body{
+    background-color: #f0f3f7;
+} */
+.home{
+    border: 1px solid black;
+    height: 350px;
+}
+
+.div1{
+    /* border: 1px solid rgb(56, 51, 51); */
+    width: 250px;
+    height: 170px;
+    text-align: center;
+    margin-left: 30px;
+    margin-top: 3px;
+    
+    
+}
+
+.div2{
+    /* border: 1px solid rgb(56, 51, 51); */
+    width: 250px;
+    height: 170px;
+    
+    margin-left: 150px;
+    margin-top: 3px;
+    
+    
+}
+
+.div3{
+    /* border: 1px solid rgb(56, 51, 51); */
+    width: 250px;
+    height: 170px;
+    
+    
+    
+    
+}
+
+.propos{
+    color: #793d05;
+    font-size: 20px;
 }

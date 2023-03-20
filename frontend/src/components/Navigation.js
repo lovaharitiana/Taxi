@@ -36,25 +36,25 @@ const Navigation = () => {
         <CDBSidebarContent>
           <CDBSidebarMenu>
             <NavLink exact to="/" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="home">Home</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="home">Tableau de bord</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/chauffeurs" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="user">Chauffeur List</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="user">Chauffeur Liste</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/taxis" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="taxi">Taxi List</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="taxi">Taxi Liste</CDBSidebarMenuItem>
             </NavLink>
             {/* <NavLink exact to="/carte_grises" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="list">Carte grise List</CDBSidebarMenuItem>
             </NavLink> */}
             <NavLink exact to="/visites" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="list">Visite list</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="list">Visite liste</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/assurances" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="list">Assurance list</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="list">Assurance liste</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/agences" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="list">Agence list</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="list">Agence liste</CDBSidebarMenuItem>
             </NavLink>
             {/* <NavLink exact to="/capacites" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="list">Capacite list</CDBSidebarMenuItem>
@@ -66,10 +66,10 @@ const Navigation = () => {
               <CDBSidebarMenuItem icon="list">Categories list</CDBSidebarMenuItem>
             </NavLink> */}
             <NavLink exact to="/users" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="list">Utilisateur list</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="list">Utilisateur liste</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/course" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="list">Course list</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="list">Course liste</CDBSidebarMenuItem>
             </NavLink>
             
            

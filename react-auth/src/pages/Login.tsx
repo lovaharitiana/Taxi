@@ -2,7 +2,9 @@ import React, { useState, SyntheticEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import "./login.css"
-
+import imgPhone from "./../assets/phone.png"
+import imgTaxi from "./../assets/taxi.png"
+import imgDroite from "./../assets/photodroite.png"
 const Login = () => {
 
     const [email, setEmail] = useState('');
@@ -46,18 +48,26 @@ const Login = () => {
 
 
     return (
-        <div className="container mt-5" style={{ fontFamily: 'poppins' }}>
+        <div className="block_container" style={{ fontFamily: 'poppins' }}>
             <div className='partie_gauche'>
+
                 <div className='formulaire_login'>
+                    <p className='reinscription'>
+                        <img className="img_taxi" src={imgTaxi} alt="Card image cap" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Vous êtes nouveau ? <Link to="/register">Créer un compte</Link>
+                    </p>
+                    <div className="phone">
+                        <img className="img_phone" src={imgPhone} alt="Card image cap" />
+                    </div>
                     <p className='appelez'>
                         <strong>Appelez nous directement au:</strong>
-                        <div className="telephone">(+261)&nbsp;34&nbsp;78&nbsp;900&nbsp;12</div>
+                        <div className="telephone"><strong>(+261)&nbsp;34&nbsp;12&nbsp;345&nbsp;67</strong></div>
                     </p>
 
 
                     <p className='ou'>
                         <strong>Ou</strong>
-                       
+
                     </p>
                     <p className="connectez_vous"><strong>Connectez-vous</strong></p>
 
@@ -65,7 +75,7 @@ const Login = () => {
                 {error && <div className="error">{error}</div>}
 
                 <form onSubmit={submit}>
-                    <div className='form-group'>
+                    <div className='email_input'>
                         <label htmlFor="">Email*</label>
                         <input
                             className='form-control'
@@ -76,7 +86,7 @@ const Login = () => {
                             required />
                     </div>
                     <p></p>
-                    <div className='form-group'>
+                    <div className='password_input'>
                         <label htmlFor="">Password*</label>
                         <input
                             className='form-control'
@@ -91,9 +101,12 @@ const Login = () => {
                         <button className='btn btn-primary' type='submit'>Connexion</button>
                     </div>
                 </form>
-                {/* <p className='mt-3'>
-                    Vous êtes nouveau ? <Link to="/register">Créer un compte</Link>
-                </p> */}
+
+            </div>
+            <div className='partie_droite'>
+                <span className='reservation_droite'><strong>N'attendez plus pour réserver ...</strong></span>
+                <img className="img_droite" src={imgDroite} alt="Card image cap" />
+                      
             </div>
         </div>
 

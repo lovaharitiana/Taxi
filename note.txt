@@ -1,0 +1,10 @@
+env\Scripts\activate entrer dans l'environnement virtuel
+cd backend
+python manage.py runserver
+
+
+cd frontend: back-office
+npm start
+
+cd react-auth:interface utilisateur
+npm start

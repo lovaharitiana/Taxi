@@ -1,43 +1,112 @@
+.formulaire_login {
 
-
-
-.form-control{
-    width: 45%;
-}
-.formulaire_login{
-    padding-top: 70px;
     margin-bottom: 20px;
 }
 
-.btn_connexion{
-    padding-top: 30px;
-    margin-left: 37%;
+.btn_connexion {
+
+    margin-left: 60%;
+
 }
 
-.telephone{
+.telephone {
     font-size: 25px;
     margin-left: 5%;
     color: #007bff;
 }
 
-.appelez{
+.appelez {
     font-size: 25px;
     margin-left: 70px;
-   
+
 }
 
-
-
-
-
-.ou{
+.ou {
     margin-left: 200px;
 }
 
-.connectez_vous{
+.connectez_vous {
     font-size: 25px;
-     margin-left: 130px;
-   
+    margin-left: 130px;
+
 }
 
 
+
+.img_droite {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+    margin-top: 5px;
+
+}
+
+.phone {
+    margin-left: 30%;
+}
+
+.img_phone {
+    vertical-align: middle;
+    border-style: none;
+    width: 50px;
+    height: 50px;
+}
+
+
+.img_taxi {
+    width: 40px;
+    height: 40px;
+}
+
+.block_container {
+    width: 100%;
+
+    padding: 2%;
+    display: flex;
+    flex-direction: reverse;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: white;
+}
+
+.partie_gauche {
+    width: 45%;
+    height: 80%;
+    margin-left: 40px;
+    background-color: white;
+    /* border: 1px solid black; */
+}
+
+.partie_droite {
+    
+    height: 500px;
+
+    /* border: 1px solid rgb(82, 77, 77); */
+    background-color: white;
+}
+
+.email_input {
+    width: 1000px;
+}
+
+.password_input {
+    width: 1000px;
+}
+
+.reservation_droite {
+    font-size: 25px;
+    margin-left: 100px;
+    padding-top: 20px;
+
+}
+
+/* .reservation_droite {
+    font-size: 2.2em;
+    display: inline-block;
+    
+    margin: 10px auto;
+    position: absolute;
+    top: 41px;
+    font-weight: 700;
+} */

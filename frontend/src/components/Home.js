@@ -151,8 +151,9 @@ function Home() {
   return (
     <div className="App" style={{ fontFamily: 'Times New Roman'}}>
       <div className="container">
+        <p style={{ fontSize: '25px', textAlign: 'center'}}><strong>Chiffre d'affaires</strong></p>
         <div className="card">
-          <BarChart width={500} height={300} data={data}>
+          <BarChart width={900} height={500} data={data}>
             <XAxis dataKey="taxi" />
             <YAxis />
             <Tooltip />

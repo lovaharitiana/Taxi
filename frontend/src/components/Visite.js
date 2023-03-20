@@ -131,7 +131,7 @@ const Visites = () => {
                 </tbody>
             </Table>
             <ButtonToolbar>
-                <Button variant="success" onClick={handleAdd}>Add</Button>{' '}
+                <Button variant="success" onClick={handleAdd}>Ajouter</Button>{' '}
                 <AddVisiteModal show={addModalShow} onHide={AddModalClose} setUpdated={setIsUpdated}>
                 </AddVisiteModal>
             </ButtonToolbar>

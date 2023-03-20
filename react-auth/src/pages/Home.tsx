@@ -230,7 +230,7 @@ const Home = (props: any) => {
 
                                 <Form.Group controlId="destination">
                                     <Form.Label><strong>Destination</strong></Form.Label>
-                                    <Form.Control value={destinationValue} type="text" name="destination" placeholder=""></Form.Control>
+                                    <Form.Control value={destinationValue} type="text" name="destination" placeholder="" className='destination'></Form.Control>
                                 </Form.Group>
 
                             </div>
@@ -241,7 +241,7 @@ const Home = (props: any) => {
                             <div className='deuxieme_formulaire'>
                                 <Form.Group controlId="description">
                                     <Form.Label><strong>Description</strong></Form.Label>
-                                    <Form.Control type="text" as="textarea" rows={parseInt('5', 10)} name="description" value={description} onChange={e => setDescription(e.target.value)} required placeholder="Indication pour notre chauffeur "></Form.Control>
+                                    <Form.Control type="text" as="textarea" rows={parseInt('5', 10)} name="description" value={description} onChange={e => setDescription(e.target.value)} required placeholder="Indication pour notre chauffeur " className='description'></Form.Control>
                                 </Form.Group>
                             </div>
                         </div>
